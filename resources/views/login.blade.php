@@ -37,6 +37,7 @@
     <!-- Helpers -->
     <script src="../assets/vendor/js/helpers.js"></script>
     <script src="../assets/js/config.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -61,10 +62,11 @@
                         <h4 class="mb-2">Welcome Back! 👋</h4>
                         <p class="mb-4">Please sign-in to your account</p>
 
-                        <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+                        <form id="loginForm" class="mb-3">
+                            @csrf
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email Id</label>
-                                <input type="text" class="form-control" id="email" name="email-username"
+                                <input type="text" class="form-control" id="email" name="email"
                                     placeholder="Enter your email or username" autofocus autocomplete="OFF"/>
                             </div>
                             <div class="mb-3 form-password-toggle">
@@ -82,7 +84,7 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                                <button class="btn btn-primary d-grid w-100 signin-btn" type="submit">Log in</button>
                             </div>
                         </form>
                     </div>
@@ -110,6 +112,60 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $('#loginForm').on('submit', function(e){
+
+            e.preventDefault();
+
+            const formData = new FormData(this);
+
+            $('.signin-btn').attr('disabled', true);
+            $('.signin-btn').text('Please Wait...');
+
+            $.ajax({
+                url:"{{route('admin.login')}}",
+                type:"POST",
+                contentType: false,
+                processData: false,
+                data:formData,
+                success:function(response){
+                    if(response.status == 200){
+                        setTimeout(() => {
+                            $('.signin-btn').text('SignIn Successful');
+                        }, 1000);
+
+                        setTimeout(() => {
+                            $('.signin-btn').text('Redirecting...');
+                            window.location.replace(response.data);
+                        }, 2000);
+
+                        
+                    }else{
+                        toastr.error(response.message, 'Error', {
+                            positionClass: 'toast-top-right',
+                            closeButton: true,
+                            progressBar: true,
+                            timeOut: 3000
+                        });
+                        $('.signin-btn').attr('disabled', false);
+                        $('.signin-btn').text('Sign In');
+                    }
+                },error:function(xhr, status, error){
+                    toastr.error('Oops! Something Went Wrong.', 'Error', {
+                        positionClass: 'toast-top-right',
+                        closeButton: true,
+                        progressBar: true,
+                        timeOut: 3000
+                    });
+
+                    $('.signin-btn').attr('disabled', false);
+                    $('.signin-btn').text('Sign In');
+                }
+            });
+
+        });
+    </script>
 </body>
 
 </html>
