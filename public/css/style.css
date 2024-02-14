@@ -1,0 +1,39 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+.login-form{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height:100vh;
+}
+body{
+  background:#e9e7f7;
+}
+.login-form .card{
+  border-radius: 0px;
+  width: 60%;
+  box-shadow: 0px 1px 7px #aba8a8;
+  height: 350px;
+  overflow: hidden;
+}
+.login-form .card .card-image img{
+  max-height: 450px;
+}
+.forgot-password-link{
+  display: flex;
+  flex-direction: row-reverse;
+  color: #555454;
+  font-weight: 500;
+  font-size: 12px;
+}
+.btn-login{
+  border-radius: 0px;
+  width: 50%;
+}
+.form-control{
+  border-radius:0px;
+}
