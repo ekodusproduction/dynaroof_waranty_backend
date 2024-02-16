@@ -73,11 +73,11 @@ class RegisteredCustomerController extends Controller
 
                     
                     // $templateId = '1307167066897372955';
-                    // $flowId = '6396aeb36fed3f4e8601e953';
+                    $flowId = '6396aeb36fed3f4e8601e953';
 
 
-                    // $sendOTPSMS =  $this->sendOTPSMS(null, $flowId, '91'.$request->phone, $otp );
-                    $sendOTPSMS = true;
+                    $sendOTPSMS =  $this->sendOTPSMS(null, $flowId, '91'.$request->phone, $otp );
+                    // $sendOTPSMS = true;
                     if($sendOTPSMS){
                         return $this->success('Great! Registration successfull', null, null, 200);
                     }
@@ -104,15 +104,23 @@ class RegisteredCustomerController extends Controller
         }else{
             try{
 
-              
-                // Customer::where('phone', $request->phone)->where('otp', $request->otp)->update([
-                //     'is_otp_verified' => 1
-                // ]);
-                // // $templateId = '1307167066897372955';
-                // $flowId = '65c60c07d6fc05219d728073';
+                $get_customer = Customer::where('phone', $request->phone)->first();
+                if($get_customer->otp == $request->otp){
+                    Customer::where('phone', $request->phone)->update([
+                        'is_otp_verified' => 1
+                    ]);
 
-                // $this->sendNormalSMS(null, $flowId, '91'.$request->phone);
-                return $this->success('OTP verified successfully', $request->otp, null, 200);
+                    // $templateId = '1307167066897372955';
+                    $flowId = '65c60c07d6fc05219d728073';
+
+                    $this->sendNormalSMS(null, $flowId, '91'.$request->phone);
+
+                    return $this->success('OTP verified successfully', null, null, 200);
+                }else{
+                    return $this->error('Invalid OTP', null, null, 400);
+                }
+                
+                
             }catch(\Exception $e){
                 return $this->error('Oops! Something went wrong', null, null, 500);
             }
@@ -129,11 +137,14 @@ class RegisteredCustomerController extends Controller
         }else{
             try{
                 $otp = rand(100000, 999999);
+                Customer::where('phone', $request->phone)->update([
+                    'otp' => $otp
+                ]);
                 // $templateId = '1307167066897372955';
                 $flowId = '6396aeb36fed3f4e8601e953';
                 $sendOTPSMS =  $this->sendOTPSMS(null, $flowId, '91'.$request->phone, $otp );
                 if($sendOTPSMS){
-                    return $this->success('OTP sent successfully', $otp, null, 200);
+                    return $this->success('OTP sent successfully', null, null, 200);
                 }
             }catch(\Exception $e){
                 return $this->error('Oops! Something went wrong', null, null, 500);
