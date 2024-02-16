@@ -13,7 +13,13 @@ class RegisteredCustomerController extends Controller
 {
     use ApiResponse, SMSResponse;
     public function getRegisteredCustomer(){
-        return view('customer.registered-customer');
+        try{
+            $get_customers = Customer::orderBy('created_at', 'DESC')->get();
+            return view('customer.registered-customer')->with(['customer' => $get_customers]);
+        }catch(\Exception $e){
+            echo 'Oops! Something went wrong.';
+        }
+        
     }
 
     public function registration(Request $request){

@@ -25,6 +25,25 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @forelse ($customer as $index => $item)
+                                            <tr>
+                                                <td>{{$index + 1}}</td>
+                                                <td>{{$item->name}}</td>
+                                                <td>{{$item->email}}</td>
+                                                <td>{{$item->phone}}</td>
+                                                <td>{{$item->dealer_name}}</td>
+                                                <td>{{$item->material_type}}</td>
+                                                <td>{{\Carbon\Carbon::parse($item->date_of_purchase)->format('d M, Y')}}</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary">View</button>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td>No data found.</td>
+                                            </tr>
+                                        @endforelse
+                                        
                                     </tbody>
                                 </table>
                             </div>
