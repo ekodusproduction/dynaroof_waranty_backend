@@ -52,31 +52,34 @@ class RegisteredCustomerController extends Controller
                     return $this->error('Oops! Email already exists', null, null, 400);
                 }
                 if(!$check_phone_exists){
-                    // Customer::create([
-                    //     'name' => $request->fullName,
-                    //     'email' => $request->email,
-                    //     'phone' => $request->phone,
-                    //     'dealer_name' => $request->dealerName,
-                    //     'material_type' => $request->materialType,
-                    //     'date_of_purchase' => $request->dateOfPurchase,
-                    //     'country' => $request->country,
-                    //     'district' => $request->district,
-                    //     'state'  => $request->state,
-                    //     'color_of_sheets' => $request->colorOfSheets,
-                    //     'number_of_sheets' => $request->numberOfSheets,
-                    //     'serial_number' => $request->serialNumber,
-                    //     'thickness_of_sheets' => $request->thicknessOfSheets,
-                    //     'invoice' => $file,
-                    // ]);
-
                     $otp = rand(100000, 999999);
+                    Customer::create([
+                        'name' => $request->fullName,
+                        'email' => $request->email,
+                        'phone' => $request->phone,
+                        'otp' => $otp,
+                        'dealer_name' => $request->dealerName,
+                        'material_type' => $request->materialType,
+                        'date_of_purchase' => $request->dateOfPurchase,
+                        'country' => $request->country,
+                        'district' => $request->district,
+                        'state'  => $request->state,
+                        'color_of_sheets' => $request->colorOfSheets,
+                        'number_of_sheets' => $request->numberOfSheets,
+                        'serial_number' => $request->serialNumber,
+                        'thickness_of_sheets' => $request->thicknessOfSheets,
+                        'invoice' => $file,
+                    ]);
+
+                    
                     // $templateId = '1307167066897372955';
-                    $flowId = '6396aeb36fed3f4e8601e953';
+                    // $flowId = '6396aeb36fed3f4e8601e953';
 
 
-                   $sendSMS =  $this->sendSMS(null, $flowId, '91'.$request->phone, $otp );
-                    if($sendSMS){
-                        return $this->success('Great! Registration successfull', $otp, null, 200);
+                    // $sendOTPSMS =  $this->sendOTPSMS(null, $flowId, '91'.$request->phone, $otp );
+                    $sendOTPSMS = true;
+                    if($sendOTPSMS){
+                        return $this->success('Great! Registration successfull', null, null, 200);
                     }
                 }else{
                     return $this->error('Oops! Phone number already exists', null, null, 400);
@@ -86,6 +89,54 @@ class RegisteredCustomerController extends Controller
 
             }catch(\Exception $e){
                 return $this->error('Oops! Something went wrong'.$e->getMessage(), null, null, 500);
+            }
+        }
+    }
+
+    public function verifyOTP(Request $request){
+        $validator = Validator::make($request->all(), [
+            'phone' => 'required',
+            'otp' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return $this->error('Oops! '.$validator->errors()->first(), null, null, 400);
+        }else{
+            try{
+
+              
+                // Customer::where('phone', $request->phone)->where('otp', $request->otp)->update([
+                //     'is_otp_verified' => 1
+                // ]);
+                // // $templateId = '1307167066897372955';
+                // $flowId = '65c60c07d6fc05219d728073';
+
+                // $this->sendNormalSMS(null, $flowId, '91'.$request->phone);
+                return $this->success('OTP verified successfully', $request->otp, null, 200);
+            }catch(\Exception $e){
+                return $this->error('Oops! Something went wrong', null, null, 500);
+            }
+        }
+    }
+
+    public function resendOTP(Request $request){
+        $validator = Validator::make($request->all(), [
+            'phone' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return $this->error('Oops! '.$validator->errors()->first(), null, null, 400);
+        }else{
+            try{
+                $otp = rand(100000, 999999);
+                // $templateId = '1307167066897372955';
+                $flowId = '6396aeb36fed3f4e8601e953';
+                $sendOTPSMS =  $this->sendOTPSMS(null, $flowId, '91'.$request->phone, $otp );
+                if($sendOTPSMS){
+                    return $this->success('OTP sent successfully', $otp, null, 200);
+                }
+            }catch(\Exception $e){
+                return $this->error('Oops! Something went wrong', null, null, 500);
             }
         }
     }

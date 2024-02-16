@@ -21,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('customer-registration', [RegisteredCustomerController::class, 'registration']);
 Route::post('verify-otp', [RegisteredCustomerController::class, 'verifyOTP']);
+Route::post('resend-otp', [RegisteredCustomerController::class, 'resendOTP']);
+
