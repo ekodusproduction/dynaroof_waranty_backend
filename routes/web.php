@@ -3,6 +3,7 @@
 use App\Http\Controllers\Customer\RegisteredCustomerController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Login\LoginController;
+use App\Http\Controllers\Settings\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,9 @@ Route::group(['middleware' => 'auth'], function(){
     });
     Route::group(['prefix' => 'customer'], function(){
         Route::get('registered', [RegisteredCustomerController::class, 'getRegisteredCustomer'])->name('admin.get.registered.customer');
+    });
+    Route::group(['prefix' => 'settings'], function(){
+        Route::get('change-password', [ChangePasswordController::class, 'changePassword'])->name('admin.settings.get.change.password');
     });
     Route::get('logout', function(){
         Session::flush();

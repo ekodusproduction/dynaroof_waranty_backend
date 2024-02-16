@@ -1,7 +1,7 @@
 @extends('welcome')
 @section('title', 'Registered customers')
 @section('content')
-    <div class="container mt-4">
+    <div class="container-fluid mt-4">
         <div class="row row-sm">
             <div class="col-lg-12 col-md-12">
                 <div class="card">
