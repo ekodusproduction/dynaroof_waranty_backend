@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::group(['prefix' => 'customer'], function(){
         Route::get('registered', [RegisteredCustomerController::class, 'getRegisteredCustomer'])->name('admin.get.registered.customer');
         Route::post('get-details', [RegisteredCustomerController::class, 'getCustomerDetails'])->name('admin.get.customer.details');
+        Route::post('invoice-count', [RegisteredCustomerController::class, 'downloadInvoiceCount'])->name('admin.invoice.count');
     });
     Route::group(['prefix' => 'settings'], function(){
         Route::match(['get', 'post' ], 'change-password', [ChangePasswordController::class, 'changePassword'])->name('admin.settings.change.password');

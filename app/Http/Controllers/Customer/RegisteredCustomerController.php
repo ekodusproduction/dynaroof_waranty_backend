@@ -167,4 +167,16 @@ class RegisteredCustomerController extends Controller
             }
         }
     }
+
+    public function downloadInvoiceCount(Request $request){
+        $customer_id = $request->customer_id;
+        try{
+            Customer::where('id', $customer_id)->update([
+                'is_invoice_downloaded' => 1
+            ]);
+            return $this->success('Great! Count updated successfully', null, null, 200);
+        }catch(\Exception $e){
+            return $this->error('Oops! Something went wrong', null, null, 500);
+        }
+    }
 }

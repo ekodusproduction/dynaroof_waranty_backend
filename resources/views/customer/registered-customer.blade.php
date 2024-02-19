@@ -180,7 +180,7 @@
                                                     <div class="d-flex align-items-start align-items-sm-center gap-4">
                                                         <img src="{{asset('bg-8.jpg')}}" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar">
                                                         <div class="button-wrapper">
-                                                            <a href="../${data.data.invoice}" target="_blank" class="btn btn-primary me-2 mb-4" download >Download Invoice</a>
+                                                            <a href="../${data.data.invoice}" target="_blank" class="btn btn-primary me-2 mb-4" download data-id="${data.data.id}" id="downloadInvoiceBtn" >Download Invoice</a>
                                                         
                                                         </div>
                                                     </div>
@@ -202,6 +202,23 @@
                 },error:function(error){
                     console.log('Error ==>',error)
                 }
+            });
+        });
+
+        $('#downloadInvoiceBtn').on('click', function(){
+            const customer_id = $(this).data('id');
+            $.ajax({
+                url:"{{route('admin.invoice.count')}}",
+                type:"POST",
+                data:{
+                    customer_id : customer_id,
+                    '_token' : "{{ csrf_token() }}"
+                },success:function(data){
+                    console.log(data)
+                },error:function(error){
+                    console.log(error)
+                }
+
             });
         });
     </script>
