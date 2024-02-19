@@ -30,7 +30,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('registered', [RegisteredCustomerController::class, 'getRegisteredCustomer'])->name('admin.get.registered.customer');
     });
     Route::group(['prefix' => 'settings'], function(){
-        Route::get('change-password', [ChangePasswordController::class, 'changePassword'])->name('admin.settings.get.change.password');
+        Route::match(['get', 'post' ], 'change-password', [ChangePasswordController::class, 'changePassword'])->name('admin.settings.change.password');
     });
     Route::get('logout', function(){
         Session::flush();

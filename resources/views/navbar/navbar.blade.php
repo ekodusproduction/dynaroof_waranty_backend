@@ -37,7 +37,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="{{route('admin.settings.get.change.password')}}">
+                        <a class="dropdown-item" href="{{route('admin.settings.change.password')}}">
                             <i class="bx bx-cog me-2"></i>
                             <span class="align-middle">Settings</span>
                         </a>
