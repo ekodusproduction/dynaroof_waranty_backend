@@ -22,6 +22,16 @@ class RegisteredCustomerController extends Controller
         
     }
 
+    public function getCustomerDetails(Request $request){
+        $customer_id = decrypt($request->customer_id);
+        try{
+            $get_details = Customer::where('id', $customer_id)->first();
+            return $this->success('Great! Details fetched successfully', $get_details, null, 200);
+        }catch(\Exception $e){
+            return $this->error('Oops! Something went wrong', null, null, 500);
+        }
+    }
+
     public function registration(Request $request){
         $validator = Validator::make($request->all(),[
             'fullName' => 'required',
@@ -44,13 +54,13 @@ class RegisteredCustomerController extends Controller
             return $this->error('Oops! '.$validator->errors()->first(), null, null, 400);
         }else{
             try{
-                $url = url('/');
+                // $url = url('/');
                 $main_image = $request->invoice;
                 $file = null;
                 if($request->hasFile('invoice')){
                     $new_name = date('d-m-Y-H-i-s') . '_' . $main_image->getClientOriginalName();
                     $main_image->move(public_path('customer/warranty/uploads/invoice/'), $new_name);
-                    $file = $url . '/customer/warranty/uploads/invoice/' . $new_name;
+                    $file = 'customer/warranty/uploads/invoice/' . $new_name;
                 }
                 $check_phone_exists = Customer::where('phone', $request->phone)->exists();
                 $check_email_exists = Customer::where('email', $request->email)->exists();
