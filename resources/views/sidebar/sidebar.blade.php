@@ -37,5 +37,18 @@
                 </li>
             </ul>
         </li>
+        <li class="{{Request::segment(1) == 'warranty' ? 'menu-item active' : 'menu-item'}}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bxs-user-pin"></i>
+                <div data-i18n="Layouts">Warranty</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="{{Request::segment(2) == 'generate' ? 'menu-item active' : 'menu-item'}}">
+                    <a href="{{route('admin.generate.warranty.card')}}" class="menu-link">
+                        <div data-i18n="Without menu">Generate Card</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
     </ul>
 </aside>
