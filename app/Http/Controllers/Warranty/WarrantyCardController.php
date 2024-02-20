@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Warranty;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\Warranty;
 use App\Traits\ApiResponse;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -42,7 +43,26 @@ class WarrantyCardController extends Controller
             ];
 
             $pdf = PDF::loadView('warranty.load-warranty', $data)->setOptions(['defaultFont' => 'sans-serif']);
-            return $pdf->download('warranty_card.pdf');
+            $pdfContents = $pdf->output();
+
+            // Generate a unique filename for the PDF
+            $pdfFileName = $get_customers->name . '_' . uniqid() . '_warranty_card.pdf';
+            
+            // Save the PDF to the public folder
+            file_put_contents(public_path($pdfFileName), $pdfContents);
+
+            Warranty::create([
+                'customer_id' => $get_customers->id,
+                'card_link' => $pdfFileName,
+                'warranty_issue_date' => Carbon::now(),
+                'warranty_valid_till' => $warranty_valid_till
+            ]);
+
+            Customer::where('id', $get_customers->id)->update([
+                'is_warranty_issued' => 1
+            ]);
+
+            return back()->with('success', 'Great! Waranty card generated successfully.');
         }catch(\Exception $e){
             return $this->error('Oops! Something went wrong'.$e->getMessage().' Line number ==>'.$e->getLine(), null, null, 500);
         }

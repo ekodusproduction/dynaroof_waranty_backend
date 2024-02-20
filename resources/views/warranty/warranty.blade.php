@@ -65,24 +65,13 @@
     </div>
 </div>
 @endsection
-{{-- @section('custom-scripts')
+@section('custom-scripts')
     <script>
-        $('.selected-customer').on('change', function(e){
-            const selected_id =  e.target.value;
-            $.ajax({
-                url:"{{route('admin.generate.warranty.card')}}",
-                type:"POST",
-                data:{
-                    'selected_id' : selected_id,
-                    '_token' : "{{csrf_token()}}"
-                },
-                success:function(data){
-                    console.log('Data ==>', data)
-                },
-                error:function(error){
-                    console.log(error)
-                }
-            })
-        });
+        @if (session('success'))
+            toastr.success('{{ session('success') }}', '', {
+                positionClass: 'toast-top-right',
+                timeOut: 3000
+            });
+        @endif
     </script>
-@endsection --}}
+@endsection
