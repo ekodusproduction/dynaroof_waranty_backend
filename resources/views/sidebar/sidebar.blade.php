@@ -39,7 +39,7 @@
         </li>
         <li class="{{Request::segment(1) == 'warranty' ? 'menu-item active' : 'menu-item'}}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bxs-user-pin"></i>
+                <i class="menu-icon tf-icons bx bxs-credit-card-front"></i>
                 <div data-i18n="Layouts">Warranty</div>
             </a>
             <ul class="menu-sub">
