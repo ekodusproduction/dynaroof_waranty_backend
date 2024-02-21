@@ -6,13 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Warranty;
 use App\Traits\ApiResponse;
+use App\Traits\SMSResponse;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class WarrantyCardController extends Controller
 {
-    use ApiResponse;
+    use ApiResponse, SMSResponse;
     public function generateWarrantyCard(Request $request){
         try{
             $get_customers = Customer::where('is_warranty_issued', 0)->get();
@@ -46,7 +47,7 @@ class WarrantyCardController extends Controller
             $pdfContents = $pdf->output();
 
             // Generate a unique filename for the PDF
-            $pdfFileName = $get_customers->name . '_' . uniqid() . '_warranty_card.pdf';
+            $pdfFileName = uniqid() . '_warranty_card.pdf';
             
             // Save the PDF to the public folder
             file_put_contents(public_path($pdfFileName), $pdfContents);
@@ -77,7 +78,25 @@ class WarrantyCardController extends Controller
         }
     }
 
-    public function sendWarrantyCardLink(){
-        
+    public function sendWarrantyCardLink(Request $request){
+        try{
+            $customer_id = $request->customer_id;
+            $phone = $request->phone;
+            $material = $request->material;
+            $link = $request->link;
+
+            $flowId = '65c60c50d6fc05288232b172';
+            $sendOTPSMS =  $this->sendCustomSMS($flowId, '91'.$phone, $material, $link );
+            // $sendOTPSMS = true;
+            if($sendOTPSMS){
+                Warranty::where('customer_id', $customer_id)->update([
+                    'is_download_link_sent' => 1
+                ]);
+                return $this->success('Great! Warranty card download link sent successfull', null, null, 200);
+            }
+
+        }catch(\Exception $e){
+            return $this->error("Oops! Something went wrong", null, null, 500);
+        }
     }
 }

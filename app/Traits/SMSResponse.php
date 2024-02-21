@@ -63,5 +63,36 @@ trait SMSResponse{
 
         
     }
+
+    protected function sendCustomSMS($flowId = null, $phone, $material, $link){
+
+        try {
+            Msg91::sms()
+            ->to($phone) // set the mobiles with country code
+            ->flow($flowId) // set the flow id
+            ->variable('var', $material)
+            ->variable('var1', $link) 
+            ->send();
+
+            // Msg91::otp()
+            // ->to($phone) // phone number with country code
+            // ->template($templateId) // set the otp template
+            // ->send(); // send
+            return true;
+        } catch (\Craftsys\Msg91\Exceptions\ValidationException $e) {
+            // issue with the request e.g. token not provided
+            echo "Token error".$e->getMessage();
+        } catch (\Craftsys\Msg91\Exceptions\ResponseErrorException $e) {
+            // error thrown by msg91 apis or by http client
+            echo "Http client error".$e->getMessage();
+        } catch (\Exception $e) {
+            echo "Something went wrong".$e->getMessage();
+            // something else went wrong
+            // plese report if this happens :)
+        }
+
+        
+    }
+    
 }
 

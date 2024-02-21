@@ -100,9 +100,6 @@ class RegisteredCustomerController extends Controller
                 }else{
                     return $this->error('Oops! Phone number already exists', null, null, 400);
                 }
-
-                
-
             }catch(\Exception $e){
                 return $this->error('Oops! Something went wrong'.$e->getMessage(), null, null, 500);
             }

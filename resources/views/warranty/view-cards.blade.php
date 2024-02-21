@@ -44,10 +44,10 @@
                                             </td>
                                             <td>
                                                 <button class="btn btn-sm btn-primary sendLinkBtn" 
-                                                data-id={{encrypt($item->id)}}
-                                                data-phone={{encrypt($item->phone)}}
-                                                data-material={{encrypt($item->material_type)}}
-                                                data-link={{encrypt($item->card_link)}}
+                                                data-id={{$item->customer_id}}
+                                                data-phone={{$item->customers->phone}}
+                                                data-material={{$item->customers->material_type}}
+                                                data-link={{asset($item->card_link)}}
                                                 >Send Link</button>
                                             </td>
                                         </tr>
@@ -70,7 +70,51 @@
 @section('custom-scripts')
     <script>
         $('.sendLinkBtn').on('click', function(){
-            alert();
+            $(this).attr('disabled', true)
+            $(this).text('sending..')
+            const customer_id = $(this).data('id');
+            const phone = $(this).data('phone');
+            const material = $(this).data('material');
+            const link = $(this).data('link');
+
+            console.log([{Id: customer_id, Phone: phone, Material: material, Link: link}]);
+            
+            $.ajax({
+                url:"{{route('admin.send.warranty.card.link')}}",
+                type:"POST",
+                data:{
+                    'customer_id' : customer_id,
+                    'phone' : phone,
+                    'material' : material,
+                    'link' : link,
+                    '_token' : "{{csrf_token()}}"
+                },
+                success:function(data){
+                    if(data.status == 200){
+                        toastr.success(data.message, '', {
+                            positionClass: 'toast-top-right',
+                            timeOut: 3000
+                        });
+                        $('.sendLinkBtn').attr('disabled', false)
+                        $('.sendLinkBtn').text('Send Link')
+                        // location.reload(true)
+                    }else{
+                        toastr.error(data.message, '', {
+                            positionClass: 'toast-top-right',
+                            timeOut: 3000
+                        });
+                        $('.sendLinkBtn').attr('disabled', false)
+                        $('.sendLinkBtn').text('Send Link')
+                    }
+                },error:function(error){
+                    toastr.error(error, '', {
+                        positionClass: 'toast-top-right',
+                        timeOut: 3000
+                    });
+                    $('.sendLinkBtn').attr('disabled', false)
+                    $('.sendLinkBtn').text('Send Link')
+                }
+            });
         });
     </script>
 @endsection
