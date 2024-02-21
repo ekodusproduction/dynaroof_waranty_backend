@@ -48,6 +48,11 @@
                         <div data-i18n="Without menu">Generate Card</div>
                     </a>
                 </li>
+                <li class="{{Request::segment(2) == 'view-cards' ? 'menu-item active' : 'menu-item'}}">
+                    <a href="{{route('admin.view.warranty.card')}}" class="menu-link">
+                        <div data-i18n="Without menu">View cards</div>
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>

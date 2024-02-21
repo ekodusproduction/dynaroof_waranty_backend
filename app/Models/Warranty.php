@@ -10,4 +10,10 @@ class Warranty extends Model
     use HasFactory;
     protected $table = 'warranties';
     protected $guarded = [];
+
+    public function customers(){
+        return $this->belongsTo(Customer::class, 'customer_id', 'id');
+    }
 }
+
+

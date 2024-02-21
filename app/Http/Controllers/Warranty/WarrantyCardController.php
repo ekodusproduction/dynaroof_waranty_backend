@@ -67,4 +67,13 @@ class WarrantyCardController extends Controller
             return $this->error('Oops! Something went wrong'.$e->getMessage().' Line number ==>'.$e->getLine(), null, null, 500);
         }
     }
+
+    public function viewCards(){
+        try{
+            $get_warranty = Warranty::with('customers')->orderBy('created_at', 'DESC')->get();
+            return view('warranty.view-cards')->with(['get_warranty' => $get_warranty]);
+        }catch(\Exception $e){
+            return $this->error('Oops! Something went wrong', null, null, 500);
+        }
+    }
 }
