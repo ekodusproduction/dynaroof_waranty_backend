@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('generate', [WarrantyCardController::class, 'generateWarrantyCard'])->name('admin.generate.warranty.card');
         Route::get('load-pdf', [WarrantyCardController::class, 'loadWarrantyCard'])->name('admin.load.warranty.card');
         Route::get('view-cards', [WarrantyCardController::class, 'viewCards'])->name('admin.view.warranty.card');
+        Route::post('send-link', [WarrantyCardController::class, 'sendWarrantyCardLink'])->name('admin.send.warranty.card.link');
     });
     Route::group(['prefix' => 'settings'], function(){
         Route::match(['get', 'post' ], 'change-password', [ChangePasswordController::class, 'changePassword'])->name('admin.settings.change.password');

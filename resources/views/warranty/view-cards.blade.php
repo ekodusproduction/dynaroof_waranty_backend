@@ -18,10 +18,11 @@
                                         <th>Name</th>
                                         <th>Phone</th>
                                         <th>Material</th>
-                                        <th>Warranty Issue On</th>
-                                        <th>Warranty Valid Till</th>
+                                        <th>Issued On</th>
+                                        <th>Valid Till</th>
                                         <th>View</th>
-                                        <th>Action</th>
+                                        <th>Link Status</th>
+                                        <th>Download Link</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -31,11 +32,23 @@
                                             <td>{{ $item->customers->name }}</td>
                                             <td>{{ $item->customers->phone }}</td>
                                             <td>{{ $item->customers->material_type }}</td>
-                                            <td>{{ $item->warranty_issue_date }}</td>
-                                            <td>{{ $item->warranty_valid_till }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($item->warranty_issue_date)->format('d M, Y h:i a') }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($item->warranty_valid_till)->format('d M, Y h:i a') }}</td>
                                             <td><a href="{{ asset($item->card_link)}}" target="_blank">Warranty Card</a></td>
                                             <td>
-                                                <button class="btn btn-sm btn-primary cutomerModalBtn" data-id={{encrypt($item->id)}}>View</button>
+                                                @if ($item->is_download_link_sent == 1)
+                                                    <p>Sent</p>
+                                                @else
+                                                    <p>Not Sent</p>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-sm btn-primary sendLinkBtn" 
+                                                data-id={{encrypt($item->id)}}
+                                                data-phone={{encrypt($item->phone)}}
+                                                data-material={{encrypt($item->material_type)}}
+                                                data-link={{encrypt($item->card_link)}}
+                                                >Send Link</button>
                                             </td>
                                         </tr>
                                     @empty
@@ -53,4 +66,11 @@
         </div>
     </div>
 </div>
+@endsection
+@section('custom-scripts')
+    <script>
+        $('.sendLinkBtn').on('click', function(){
+            alert();
+        });
+    </script>
 @endsection

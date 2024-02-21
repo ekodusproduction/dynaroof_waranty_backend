@@ -76,4 +76,8 @@ class WarrantyCardController extends Controller
             return $this->error('Oops! Something went wrong', null, null, 500);
         }
     }
+
+    public function sendWarrantyCardLink(){
+        
+    }
 }
