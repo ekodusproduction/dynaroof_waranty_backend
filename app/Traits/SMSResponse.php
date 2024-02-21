@@ -70,8 +70,8 @@ trait SMSResponse{
             Msg91::sms()
             ->to($phone) // set the mobiles with country code
             ->flow($flowId) // set the flow id
-            ->variable('var', $material)
-            ->variable('var1', $link) 
+            ->variable('var', $link)
+            ->variable('var1', $material) 
             ->send();
 
             // Msg91::otp()
