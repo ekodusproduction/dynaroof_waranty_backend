@@ -56,7 +56,6 @@
                                             <td>No data found.</td>
                                         </tr>
                                     @endforelse
-
                                 </tbody>
                             </table>
                         </div>
