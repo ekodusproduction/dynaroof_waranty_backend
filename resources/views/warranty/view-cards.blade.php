@@ -22,7 +22,7 @@
                                         <th>Valid Till</th>
                                         <th>View</th>
                                         <th>Link Status</th>
-                                        <th>Download Link</th>
+                                        <th>Send Link</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -32,12 +32,12 @@
                                             <td>{{ $item->customers->name }}</td>
                                             <td>{{ $item->customers->phone }}</td>
                                             <td>{{ $item->customers->material_type }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($item->warranty_issue_date)->format('d M, Y h:i a') }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($item->warranty_valid_till)->format('d M, Y h:i a') }}</td>
-                                            <td><a href="{{ asset($item->card_link)}}" target="_blank">Warranty Card</a></td>
+                                            <td>{{ \Carbon\Carbon::parse($item->warranty_issue_date)->format('d M, Y') }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($item->warranty_valid_till)->format('d M, Y') }}</td>
+                                            <td><a href="{{ asset($item->card_link)}}" target="_blank">Warranty</a></td>
                                             <td>
                                                 @if ($item->is_download_link_sent == 1)
-                                                    <p>Sent</p>
+                                                    <p class="text-success mb-0">Sent</p>
                                                 @else
                                                     <p>Not Sent</p>
                                                 @endif
@@ -48,7 +48,7 @@
                                                 data-phone={{$item->customers->phone}}
                                                 data-material={{$item->customers->material_type}}
                                                 data-link={{asset($item->card_link)}}
-                                                >Send Link</button>
+                                                >Send</button>
                                             </td>
                                         </tr>
                                     @empty
@@ -97,7 +97,7 @@
                         });
                         $('.sendLinkBtn').attr('disabled', false)
                         $('.sendLinkBtn').text('Send Link')
-                        // location.reload(true)
+                        location.reload(true)
                     }else{
                         toastr.error(data.message, '', {
                             positionClass: 'toast-top-right',
