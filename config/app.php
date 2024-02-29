@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         // Barryvdh\DomPDF\ServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
+        Craftsys\Msg91\Msg91LaravelServiceProvider::class,
 
     ],
 
@@ -233,6 +234,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         // 'PDF' => Barryvdh\DomPDF\Facade::class,
         Barryvdh\Snappy\ServiceProvider::class,
+        'Msg91' => Craftsys\Msg91\Facade\Msg91::class,
 
     ],
 

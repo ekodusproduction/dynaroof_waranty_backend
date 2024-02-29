@@ -47,28 +47,52 @@ class RegisteredCustomerController extends Controller
             'numberOfSheets' => 'required|numeric',
             'serialNumber' => 'required',
             'thicknessOfSheets' => 'required|numeric',
-            'invoice' => 'required | mimes:docx,pdf|max:1048',
+            'invoice' => 'required|mimes:docx,pdf|max:1048',
         ]);
 
         if($validator->fails()){
             return $this->error('Oops! '.$validator->errors()->first(), null, null, 400);
         }else{
             try{
-                // $url = url('/');
-                $main_image = $request->invoice;
-                $file = null;
-                if($request->hasFile('invoice')){
-                    $new_name = date('d-m-Y-H-i-s') . '_' . $main_image->getClientOriginalName();
-                    $main_image->move(public_path('customer/warranty/uploads/invoice/'), $new_name);
-                    $file = 'customer/warranty/uploads/invoice/' . $new_name;
-                }
-                $check_phone_exists = Customer::where('phone', $request->phone)->exists();
-                $check_email_exists = Customer::where('email', $request->email)->exists();
-                if($check_email_exists){
-                    return $this->error('Oops! Email already exists', null, null, 400);
-                }
-                if(!$check_phone_exists){
+
+                $customer_details = Customer::where('phone', $request->phone)->first();
+
+                if($customer_details != null){
+                    if($customer_details->is_otp_verified == 0){
+
+                        $otp = rand(100000, 999999);
+
+                        $customer_details->update([
+                            'otp' => $otp
+                        ]);
+                        
+                        $flowId = '6396aeb36fed3f4e8601e953';
+                        $sendOTPSMS =  $this->sendOTPSMS(null, $flowId, '91'.$request->phone, $otp );
+                        // $sendOTPSMS = true;
+                        if($sendOTPSMS){
+                            return $this->success('Great! OTP sent successfull', null, null, 200);
+                        }
+                    }else{
+                        if($customer_details->email == $request->email){
+                            return $this->error('Oops! Email already exists', null, null, 400);
+                        }else if($customer_details->phone == $request->phone){
+                            return $this->error('Oops! Phone already exists', null, null, 400);
+                        }else{
+                            return $this->error('Oops! Something went wrong', null, null, 500);
+                        }
+                    }
+                }else{
+
+                    $main_image = $request->invoice;
+                    $file = null;
+                    if($request->hasFile('invoice')){
+                        $new_name = date('d-m-Y-H-i-s') . '_' . $main_image->getClientOriginalName();
+                        $main_image->move(public_path('customer/warranty/uploads/invoice/'), $new_name);
+                        $file = 'customer/warranty/uploads/invoice/' . $new_name;
+                    }
+
                     $otp = rand(100000, 999999);
+
                     Customer::create([
                         'name' => $request->fullName,
                         'email' => $request->email,
@@ -86,19 +110,15 @@ class RegisteredCustomerController extends Controller
                         'thickness_of_sheets' => $request->thicknessOfSheets,
                         'invoice' => $file,
                     ]);
-
                     
                     // $templateId = '1307167066897372955';
                     $flowId = '6396aeb36fed3f4e8601e953';
 
-
                     $sendOTPSMS =  $this->sendOTPSMS(null, $flowId, '91'.$request->phone, $otp );
                     // $sendOTPSMS = true;
                     if($sendOTPSMS){
-                        return $this->success('Great! Registration successfull', null, null, 200);
+                        return $this->success('Great! OTP sent successfull', null, null, 200);
                     }
-                }else{
-                    return $this->error('Oops! Phone number already exists', null, null, 400);
                 }
             }catch(\Exception $e){
                 return $this->error('Oops! Something went wrong'.$e->getMessage(), null, null, 500);
@@ -135,7 +155,7 @@ class RegisteredCustomerController extends Controller
                 
                 
             }catch(\Exception $e){
-                return $this->error('Oops! Something went wrong', null, null, 500);
+                return $this->error('Oops! Something went wrong'.$e->getMessage(), null, null, 500);
             }
         }
     }
@@ -160,7 +180,7 @@ class RegisteredCustomerController extends Controller
                     return $this->success('OTP sent successfully', null, null, 200);
                 }
             }catch(\Exception $e){
-                return $this->error('Oops! Something went wrong', null, null, 500);
+                return $this->error('Oops! Something went wrong'.$e->getMessage(), null, null, 500);
             }
         }
     }
@@ -173,7 +193,7 @@ class RegisteredCustomerController extends Controller
             ]);
             return $this->success('Great! Count updated successfully', null, null, 200);
         }catch(\Exception $e){
-            return $this->error('Oops! Something went wrong', null, null, 500);
+            return $this->error('Oops! Something went wrong'.$e->getMessage(), null, null, 500);
         }
     }
 }

@@ -13,7 +13,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class WarrantyCardController extends Controller
 {
-    use ApiResponse, SMSResponse;
+    use ApiResponse, SMSResponse ;
     public function generateWarrantyCard(Request $request){
         try{
             $get_customers = Customer::where('is_warranty_issued', 0)->get();
@@ -85,8 +85,8 @@ class WarrantyCardController extends Controller
             $material = $request->material;
             $link = $request->link;
 
-            $flowId = '65c60c50d6fc05288232b172';
-            $sendOTPSMS =  $this->sendCustomSMS($flowId, '91'.$phone, $material, $link );
+            $flowId = '65dec7e6d6fc057a2d7627e2';
+            $sendOTPSMS =  $this->sendWarrantyLinkSMS($flowId, '91'.$phone, $material, $link );
             // $sendOTPSMS = true;
             if($sendOTPSMS){
                 Warranty::where('customer_id', $customer_id)->update([
@@ -96,7 +96,7 @@ class WarrantyCardController extends Controller
             }
 
         }catch(\Exception $e){
-            return $this->error("Oops! Something went wrong", null, null, 500);
+            return $this->error("Oops! Something went wrong".$e->getMessage(), null, null, 500);
         }
     }
 }
