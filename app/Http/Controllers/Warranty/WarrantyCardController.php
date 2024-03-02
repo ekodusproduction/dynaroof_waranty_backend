@@ -34,7 +34,7 @@ class WarrantyCardController extends Controller
             }
             $data = [
                 'name' => $get_customers->name,
-                'address' => $get_customers->district.', '.$get_customers->state.', '.$get_customers->country,
+                'address' => $get_customers->district.', '.$get_customers->state ?? '' .', '.$get_customers->country,
                 'phone' => $get_customers->phone,
                 'serial_no' => $get_customers->serial_number,
                 'material_type' => $get_customers->material_type,
