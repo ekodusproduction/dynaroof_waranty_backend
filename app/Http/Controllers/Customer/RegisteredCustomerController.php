@@ -47,7 +47,7 @@ class RegisteredCustomerController extends Controller
             'numberOfSheets' => 'required|numeric',
             'serialNumber' => 'required',
             'thicknessOfSheets' => 'required|numeric',
-            'invoice' => 'required|mimes:docx,pdf|max:1048',
+            'invoice' => 'required|mimes:docx,pdf,jpg,png,jpeg|max:1048',
         ]);
 
         if($validator->fails()){
