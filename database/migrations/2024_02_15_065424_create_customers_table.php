@@ -22,7 +22,7 @@ class CreateCustomersTable extends Migration
             $table->string('material_type');
             $table->date('date_of_purchase');
             $table->string('country');
-            $table->string('state');
+            $table->string('state')->nullable();
             $table->string('district');
             $table->string('color_of_sheets');
             $table->string('number_of_sheets');
