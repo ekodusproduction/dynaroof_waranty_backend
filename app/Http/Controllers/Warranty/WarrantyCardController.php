@@ -32,9 +32,16 @@ class WarrantyCardController extends Controller
             }else{
                 $warranty_valid_till = Carbon::now()->addYears(10);
             }
+            $address = null;
+
+            if($get_customers->state == null){
+                $address = $get_customers->district.', '.$get_customers->country;
+            }else{
+                $address =  $get_customers->district.', '.$get_customers->state .', '.$get_customers->country;
+            }
             $data = [
                 'name' => $get_customers->name,
-                'address' => $get_customers->district.', '.$get_customers->state.', '.$get_customers->country,
+                'address' => $address,
                 'phone' => $get_customers->phone,
                 'serial_no' => $get_customers->serial_number,
                 'material_type' => $get_customers->material_type,
