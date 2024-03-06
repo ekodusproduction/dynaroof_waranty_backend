@@ -39,6 +39,33 @@
         .pdf-body{
             margin:50px;
         }
+
+        .terms-and-conditions-div{
+            margin-top:30px;
+            margin-bottom:80px;
+        }
+
+        .terms-and-conditions-div h5{
+            margin-top:10px;
+        }
+
+        .terms-and-conditions-div p{
+            text-align: justify;
+            margin-left:5px;
+            font-size:14px;
+            margin-bottom:0px;
+        }
+
+        .terms-and-conditions-div .terms-list ul{
+            list-style: numeric;
+        }
+
+        table, th, td{
+            border:1px solid black;
+            padding:5px;
+            font-size:14px;
+            margin-bottom:10px;
+        }
     </style>
     <div class="container">
         <div class="row">
