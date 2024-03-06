@@ -82,9 +82,9 @@
                                 <div style="margin-bottom:30px;">
                                     <p style="line-height: 30px;">
                                         This certificate serves as confirmation of product warranty for 
-                                        <bold>"$name</bold> - Phone No: <bold>"$phone</bold>, residing in <bold>"$address</bold>, who has purchased the 
-                                        <bold>"$material_type</bold> material with Serial No: <bold>"$serial_no</bold> on <bold>"$purchase_date</bold>.
-                                        The warranty is valid until <bold>"$warranty_valid_till</bold>, and was issued on <bold>"$warranty_issue_date</bold>.
+                                        <bold>{{$name}}</bold> - Phone No: <bold>{{$phone}}</bold>, residing in <bold>{{$address}}</bold>, who has purchased the 
+                                        <bold>{{$material_type}}</bold> material with Serial No: <bold>{{$serial_no}}</bold> on <bold>{{$purchase_date}}</bold>.
+                                        The warranty is valid until <bold>{{$warranty_valid_till}}</bold>, and was issued on <bold>{{$warranty_issue_date}}</bold>.
                                     </p>
                                 </div>
                                 <div style="margin-top:30px;">
