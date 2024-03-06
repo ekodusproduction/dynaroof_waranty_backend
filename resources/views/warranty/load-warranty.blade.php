@@ -100,7 +100,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" style="margin-top:20px;">
             <div class="col-12">
                 <div className="container terms-and-conditions-div">
                     <h5>Dyna Pro & Super Pro with 10 & 20 Years Warranty</h5>
