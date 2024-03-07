@@ -65,22 +65,22 @@ class WarrantyCardController extends Controller
             // Save the PDF to the public folder
             file_put_contents(public_path($pdfFileName), $pdfContents);
 
-            Session::flash('success', 'Great! Warranty card generated successfully.');
+            // Session::flash('success', 'Great! Warranty card generated successfully.');
 
-            return response()->download(public_path($pdfFileName), $pdfFileName);
+            // return response()->download(public_path($pdfFileName), $pdfFileName);
 
-            // Warranty::create([
-            //     'customer_id' => $get_customers->id,
-            //     'card_link' => $pdfFileName,
-            //     'warranty_issue_date' => Carbon::now(),
-            //     'warranty_valid_till' => $warranty_valid_till
-            // ]);
+            Warranty::create([
+                'customer_id' => $get_customers->id,
+                'card_link' => $pdfFileName,
+                'warranty_issue_date' => Carbon::now(),
+                'warranty_valid_till' => $warranty_valid_till
+            ]);
 
-            // Customer::where('id', $get_customers->id)->update([
-            //     'is_warranty_issued' => 1
-            // ]);
+            Customer::where('id', $get_customers->id)->update([
+                'is_warranty_issued' => 1
+            ]);
 
-            // return back()->with('success', 'Great! Waranty card generated successfully.');
+            return back()->with('success', 'Great! Waranty card generated successfully.');
         }catch(\Exception $e){
             return $this->error('Oops! Something went wrong'.$e->getMessage().' Line number ==>'.$e->getLine(), null, null, 500);
         }
