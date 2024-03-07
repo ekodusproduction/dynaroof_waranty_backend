@@ -36,7 +36,7 @@ class WarrantyCardController extends Controller
             }
             $address = null;
 
-            if($get_customers->state == null){
+            if($get_customers->state == 'null'){
                 $address = $get_customers->district.', '.$get_customers->country;
             }else{
                 $address =  $get_customers->district.', '.$get_customers->state .', '.$get_customers->country;
