@@ -7,13 +7,15 @@ use App\Models\Customer;
 use App\Models\Warranty;
 use App\Traits\ApiResponse;
 use App\Traits\SMSResponse;
+use App\Traits\TermsAndConditions;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Session;
 
 class WarrantyCardController extends Controller
 {
-    use ApiResponse, SMSResponse ;
+    use ApiResponse, SMSResponse, TermsAndConditions ;
     public function generateWarrantyCard(Request $request){
         try{
             $get_customers = Customer::where('is_warranty_issued', 0)->get();
@@ -39,6 +41,7 @@ class WarrantyCardController extends Controller
             }else{
                 $address =  $get_customers->district.', '.$get_customers->state .', '.$get_customers->country;
             }
+
             $data = [
                 'name' => $get_customers->name,
                 'address' => $address,
@@ -47,8 +50,11 @@ class WarrantyCardController extends Controller
                 'material_type' => $get_customers->material_type,
                 'purchase_date' => $get_customers->date_of_purchase,
                 'warranty_issue_date' => Carbon::now(),
-                'warranty_valid_till' => $warranty_valid_till
+                'warranty_valid_till' => $warranty_valid_till,
+                'terms_and_conditions' => $this->termsAndConditions()
             ];
+
+            
 
             $pdf = PDF::loadView('warranty.load-warranty', $data)->setOptions(['defaultFont' => 'sans-serif']);
             $pdfContents = $pdf->output();
@@ -71,6 +77,7 @@ class WarrantyCardController extends Controller
             ]);
 
             return back()->with('success', 'Great! Waranty card generated successfully.');
+            
         }catch(\Exception $e){
             return $this->error('Oops! Something went wrong'.$e->getMessage().' Line number ==>'.$e->getLine(), null, null, 500);
         }
