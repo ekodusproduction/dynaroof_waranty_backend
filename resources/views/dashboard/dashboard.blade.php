@@ -71,7 +71,7 @@
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-end"
                                             aria-labelledby="cardOpt3">
-                                            <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                            <a class="dropdown-item" href="{{route('admin.view.warranty.card')}}">View More</a>
                                         </div>
                                     </div>
                                 </div>
