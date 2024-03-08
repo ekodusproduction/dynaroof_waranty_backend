@@ -46,7 +46,7 @@ class RegisteredCustomerController extends Controller
             'colorOfSheets' => 'required',
             'numberOfSheets' => 'required|numeric',
             'serialNumber' => 'required',
-            'thicknessOfSheets' => 'required|numeric',
+            'thicknessOfSheets' => 'required',
             'invoice' => 'required|mimetypes:image/jpeg,image/jpg,image/png,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document|max:1048',
         ]);
 
