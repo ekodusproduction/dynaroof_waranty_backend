@@ -47,7 +47,7 @@ class RegisteredCustomerController extends Controller
             'numberOfSheets' => 'required|numeric',
             'serialNumber' => 'required',
             'thicknessOfSheets' => 'required',
-            'invoice' => 'required|mimetypes:image/jpeg,image/jpg,image/png,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document|max:1048',
+            'invoice' => 'required|mimetypes:image/jpeg,image/jpg,image/png,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document|max:5048',
         ]);
 
         if($validator->fails()){
@@ -58,29 +58,34 @@ class RegisteredCustomerController extends Controller
                 $customer_details = Customer::where('phone', $request->phone)->first();
 
                 if($customer_details != null){
-                    if($customer_details->is_otp_verified == 0){
-
-                        $otp = rand(100000, 999999);
-
-                        $customer_details->update([
-                            'otp' => $otp
-                        ]);
-                        
-                        $flowId = '6396aeb36fed3f4e8601e953';
-                        $sendOTPSMS =  $this->sendOTPSMS(null, $flowId, '91'.$request->phone, $otp );
-                        // $sendOTPSMS = true;
-                        if($sendOTPSMS){
-                            return $this->success('Great! OTP sent successfull', null, null, 200);
-                        }
+                    if($customer_details->country == 'bhutan'){
+                        return $this->error('Oops! Customer details already exists. Please enter new phone number and email.', null, null, 400);
                     }else{
-                        if($customer_details->email == $request->email){
-                            return $this->error('Oops! Email already exists', null, null, 400);
-                        }else if($customer_details->phone == $request->phone){
-                            return $this->error('Oops! Phone already exists', null, null, 400);
+                        if($customer_details->is_otp_verified == 0){
+
+                            $otp = rand(100000, 999999);
+    
+                            $customer_details->update([
+                                'otp' => $otp
+                            ]);
+                            
+                            $flowId = '6396aeb36fed3f4e8601e953';
+                            $sendOTPSMS =  $this->sendOTPSMS(null, $flowId, '91'.$request->phone, $otp );
+                            // $sendOTPSMS = true;
+                            if($sendOTPSMS){
+                                return $this->success('Great! OTP sent successfull', null, null, 200);
+                            }
                         }else{
-                            return $this->error('Oops! Something went wrong', null, null, 500);
+                            if($customer_details->email == $request->email){
+                                return $this->error('Oops! Email already exists', null, null, 400);
+                            }else if($customer_details->phone == $request->phone){
+                                return $this->error('Oops! Phone already exists', null, null, 400);
+                            }else{
+                                return $this->error('Oops! Something went wrong', null, null, 500);
+                            }
                         }
                     }
+                    
                 }else{
 
                     $main_image = $request->invoice;
@@ -111,14 +116,19 @@ class RegisteredCustomerController extends Controller
                         'invoice' => $file,
                     ]);
                     
-                    // $templateId = '1307167066897372955';
-                    $flowId = '6396aeb36fed3f4e8601e953';
+                    if($request->country == 'bhutan'){
+                        return $this->success('Thank you for applying. Your warranty card will be issued after the details are being reviewed successfully.', $request->country, null, 200);
+                    }else{
+                        $flowId = '6396aeb36fed3f4e8601e953';
 
-                    $sendOTPSMS =  $this->sendOTPSMS(null, $flowId, '91'.$request->phone, $otp );
-                    // $sendOTPSMS = true;
-                    if($sendOTPSMS){
-                        return $this->success('Great! OTP sent successfull', null, null, 200);
+                        $sendOTPSMS =  $this->sendOTPSMS(null, $flowId, '91'.$request->phone, $otp );
+                        // $sendOTPSMS = true;
+                        if($sendOTPSMS){
+                            return $this->success('Great! OTP sent successfull', null, null, 200);
+                        }
                     }
+                    // $templateId = '1307167066897372955';
+                    
                 }
             }catch(\Exception $e){
                 return $this->error('Oops! Something went wrong'.$e->getMessage(), null, null, 500);
