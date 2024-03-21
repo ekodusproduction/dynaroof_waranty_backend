@@ -43,7 +43,7 @@
                     <div class="mb-4">
                         <h6 class="card-title mb-1">Generate Warranty Card</h6>
                     </div>
-                    <form action="{{route('admin.load.warranty.card')}}" method="get">
+                    <form action="{{route('admin.load.warranty.card')}}" method="get" id="warrantyGenerateForm">
                         <div class="form-group mb-3">
                             <label for="" class="mb-2">Select customer</label>
                             <select name="customer_id" class="form-control selected-customer" required>
@@ -56,7 +56,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-md btn-primary">Generate</button>
+                            <button type="submit" class="btn btn-md btn-primary generate-btn" >Generate</button>
                         </div>
                     </form>
                 </div>
@@ -67,6 +67,14 @@
 @endsection
 @section('custom-scripts')
     <script>
+        $(document).ready(function() {
+            $(document).on('submit', 'form', function() {
+                $('button').attr('disabled', 'disabled');
+            });
+        });
+    </script>
+    <script>
+
         @if (session('success'))
             toastr.success('{{ session('success') }}', '', {
                 positionClass: 'toast-top-right',

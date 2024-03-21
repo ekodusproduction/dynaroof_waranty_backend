@@ -11,7 +11,10 @@ use App\Traits\TermsAndConditions;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class WarrantyCardController extends Controller
 {
@@ -29,7 +32,7 @@ class WarrantyCardController extends Controller
         try{
             $get_customers = Customer::where('id', $request->customer_id)->first();
             $warranty_valid_till = null;
-            if($get_customers->material_type == 'SuperPro(20 Years)'){
+            if($get_customers->material_type == 'SuperPro(20-Years)'){
                 $warranty_valid_till = Carbon::now()->addYears(20);
             }else{
                 $warranty_valid_till = Carbon::now()->addYears(10);
@@ -48,42 +51,64 @@ class WarrantyCardController extends Controller
                 'phone' => $get_customers->phone,
                 'serial_no' => $get_customers->serial_number,
                 'material_type' => $get_customers->material_type,
-                'purchase_date' => $get_customers->date_of_purchase,
-                'warranty_issue_date' => Carbon::now(),
-                'warranty_valid_till' => $warranty_valid_till,
+                'purchase_date' => Carbon::parse($get_customers->date_of_purchase)->format('d-m-Y'),
+                'warranty_issue_date' => Carbon::now()->format('d-m-Y'),
+                'warranty_valid_till' => Carbon::parse($warranty_valid_till)->format('d-m-Y'),
                 'terms_and_conditions' => $this->termsAndConditions()
             ];
 
+            $pdfFilePath = public_path(uniqid() .'_'. $get_customers->material_type.'_warranty_card.pdf');
+
+            $pdf = $this->createPDF($data, $pdfFilePath);
+
             
 
-            $pdf = PDF::loadView('warranty.load-warranty', $data)->setOptions(['defaultFont' => 'sans-serif']);
-            $pdfContents = $pdf->output();
+            // $pdf = DomPdf::loadView('warranty.load-warranty', $data)->setOptions(['defaultFont' => 'sans-serif']);
+            // $pdfContents = $pdf->stream( uniqid() . '_warranty_card.pdf');
 
-            // Generate a unique filename for the PDF
-            $pdfFileName = uniqid() . '_warranty_card.pdf';
+            // // Generate a unique filename for the PDF
+            // $pdfFileName = uniqid() . '_warranty_card.pdf';
             
             // Save the PDF to the public folder
-            file_put_contents(public_path($pdfFileName), $pdfContents);
+            // file_put_contents(public_path($pdfFileName), $pdfContents);
 
             // Session::flash('success', 'Great! Warranty card generated successfully.');
 
-            // return response()->download(public_path($pdfFileName), $pdfFileName);
+            return back()->with(['success' => 'Great! Warranty card generated successfully.' ]);
 
-            Warranty::create([
-                'customer_id' => $get_customers->id,
-                'card_link' => $pdfFileName,
-                'warranty_issue_date' => Carbon::now(),
-                'warranty_valid_till' => $warranty_valid_till
-            ]);
+            // Warranty::create([
+            //     'customer_id' => $get_customers->id,
+            //     'card_link' => $pdfFileName,
+            //     'warranty_issue_date' => Carbon::now(),
+            //     'warranty_valid_till' => $warranty_valid_till
+            // ]);
 
-            Customer::where('id', $get_customers->id)->update([
-                'is_warranty_issued' => 1
-            ]);
+            // Customer::where('id', $get_customers->id)->update([
+            //     'is_warranty_issued' => 1
+            // ]);
 
-            return back()->with('success', 'Great! Waranty card generated successfully.');
+            // return back()->with('success', 'Great! Waranty card generated successfully.');
         }catch(\Exception $e){
             return $this->error('Oops! Something went wrong'.$e->getMessage().' Line number ==>'.$e->getLine(), null, null, 500);
         }
+    }
+
+    private function createPDF($data, $filePath)
+    {
+        $options = new Options();
+        // $options->set('isRemoteEnabled', TRUE);
+        
+
+        $dompdf = new Dompdf($options);
+        $dompdf->loadHtml(view('warranty.load-warranty', $data)); // Assuming you have a blade template for your PDF
+
+        // (Optional) Set paper size and orientation
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        File::put($filePath, $dompdf->output());
     }
 
     public function viewCards(){

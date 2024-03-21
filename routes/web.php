@@ -41,6 +41,10 @@ Route::group(['middleware' => 'auth'], function(){
     Route::group(['prefix' => 'settings'], function(){
         Route::match(['get', 'post' ], 'change-password', [ChangePasswordController::class, 'changePassword'])->name('admin.settings.change.password');
     });
+
+    Route::get('warranty', function(){
+        return view('warranty.load-warranty');
+    });
     Route::get('logout', function(){
         Session::flush();
         Auth::logout();

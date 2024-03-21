@@ -1,106 +1,694 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Warranty Card</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
     <style>
-        *{
-            color:#2d2e2e;
+        * {
+            color: #2d2e2e;
             font-weight: 400;
-            
+
         }
-        .top-bar{
-            height:70px;
-            width:100%;
-            background-color:#566a7f;
-            margin-bottom:30px;
+
+        .top-bar {
+            height: 70px;
+            width: 100%;
+            background-color: #566a7f;
+            margin-bottom: 30px;
         }
-    
-        .pdf-header{
+
+        .pdf-header {
             text-align: center;
         }
-        .pdf-header p{
+
+        .pdf-header p {
             color: #174579;
             font-weight: 600;
             font-size: 25px;
             text-transform: uppercase;
-            margin-bottom:0px;
+            margin-bottom: 0px;
         }
-        .pdf-header h2{
+
+        .pdf-header h2 {
             color: #154279;
             font-weight: 600;
             font-size: 40px;
             text-transform: uppercase;
         }
-        .pdf-body{
-            margin:50px;
+
+        .pdf-body {
+            margin: 50px;
         }
 
-        .terms-and-conditions-div{
-            margin-top:30px;
-            margin-bottom:80px;
+        .terms-content {
+            margin-top: 10px;
         }
 
-        .terms-and-conditions-div h5{
-            margin-top:10px;
+        .colored-border {
+            border: 1px solid #198c91;
+            border-radius: 10px;
         }
 
-        .terms-and-conditions-div p{
-            text-align: justify;
-            margin-left:5px;
-            font-size:14px;
-            margin-bottom:0px;
+        .divider {
+            width: 500px;
+            border: 3px solid #198c91;
+            border-radius: 2px;
+            margin-left: 30px;
         }
 
-        .terms-and-conditions-div .terms-list ul{
-            list-style: numeric;
+        .content-area-1 {
+            padding: 20px;
+            margin-bottom: 30px;
         }
 
-        table, th, td{
-            border:1px solid black;
-            padding:5px;
-            font-size:14px;
+        .content-area-1 h5 {
+            color: #198c91;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .content-area-1 .header {
+            margin-top: 50px;
+        }
+
+        .content-area-1 p {
+            font-size: 14px;
+        }
+
+        .conditions-div {
+            background: #198c91;
+            color: white;
+            padding: 15px 15px 15px 10px;
+            border-radius: 10px;
+            margin-bottom: 50px;
+        }
+
+        .conditions-div ol li {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        .conditions-div ol li a {
+            color: rgb(68, 0, 255);
+        }
+
+        .content-area-2 {
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .content-area-2 h5 {
+            color: #d40f3a;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .content-area-2 .header {
+            margin-top: 50px;
+        }
+
+        .content-area-2 p {
+            font-size: 14px;
+            color:white;
+        }
+
+        .content-area-2 .divider {
+            width: 500px;
+            border: 3px solid #d40f3a;
+            border-radius: 2px;
+            margin-left: 30px;
+        }
+
+        .content-area-2 .conditions-div {
+            background: #d40f3a;
+            color: white;
+            padding: 15px 15px 15px 10px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .content-area-2 .conditions-div ol li {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        .content-area-2 .conditions-div ol li a {
+            color: rgb(68, 0, 255);
+        }
+
+        .content-area-3 {
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .content-area-3 h5 {
+            color: #198c91;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .content-area-3 .header {
+            margin-top: 50px;
+        }
+
+        .content-area-3 p {
+            font-size: 14px;
+        }
+
+        .content-area-3 .divider {
+            width: 500px;
+            border: 3px solid #198c91;
+            border-radius: 2px;
+            margin-left: 30px;
+        }
+
+        .content-area-3 .do-icon {
+            background-color: white;
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            border: 2px solid rgb(245, 41, 41);
+            margin-left: -10px;
+        }
+
+        .content-area-3 .do-icon img {
+            width:25px;
+        }
+
+        .content-area-3 .do-content {
+            background: rgb(245, 41, 41);
+            border: 1px solid rgb(245, 41, 41);
+            border-left: none;
+            border-radius: 50px;
+            width: 150px;
+            padding: 0px 5px 0px 5px;
+            margin-left: 10px;
+        }
+
+        .content-area-3 .do-content p {
+            margin-bottom: 0px;
+            margin-left: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            color:white;
+        }
+
+        .content-area-3 .conditions-div ol li {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        .content-area-3 .dont-icon {
+            background-color: white;
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            border: 2px solid #198c91;
+            margin-left: -10px;
+        }
+
+        .content-area-3 .dont-icon img {
+            width:25px;
+        }
+
+        .content-area-3 .dont-content {
+            background: #198c91;
+            border: 1px solid #198c91;
+            border-left: none;
+            border-radius: 50px;
+            width: 150px;
+            padding: 0px 5px 0px 5px;
+            margin-left: 10px;
+        }
+
+        .content-area-3 .dont-content p {
+            margin-bottom: 0px;
+            margin-left: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            color:white;
+        }
+
+        .content-area-4 {
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .content-area-4 h5 {
+            color: #198c91;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .content-area-4 .header {
+            margin-top: 50px;
+        }
+
+        .content-area-4 p {
+            font-size: 14px;
+        }
+
+        .content-area-4 .divider {
+            width: 500px;
+            border: 3px solid #198c91;
+            border-radius: 2px;
+            margin-left: 30px;
+        }
+        .pro img{
+            width:700px;
+            height:auto;
+        }
+        .pro .contents {
+            position:absolute;
+            top:40%;
+            text-align: center;
+            left:10%;
+            width:80%;
+        }
+        .pro .contents span{
+            font-weight:700;
+        }
+        .pro .contents p{
+            line-height: 30px;
+        }
+        .pro .contents h5{
+            font-weight:800;
             margin-bottom:10px;
+            font-size:18px;
         }
     </style>
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="warranty-pdf-div">
-                            <div class="top-bar"></div>
-                            <div class="pdf-header">
-                                <p>Certificate <br /> of</p>
-                                <h2 style="margin-top:0px;">Warranty</h2>
-                            </div>
-                            <div class="pdf-body">
-                                <div style="margin-bottom:30px;">
-                                    <p style="line-height: 30px;">
-                                        This certificate serves as confirmation of product warranty for 
-                                        <bold>{{$name}}</bold> - Phone No: <bold>{{$phone}}</bold>, residing in <bold>{{$address}}</bold>, who has purchased the 
-                                        <bold>{{$material_type}}</bold> material with Serial No: <bold>{{$serial_no}}</bold> on <bold>{{$purchase_date}}</bold>.
-                                        The warranty is valid until <bold>{{$warranty_valid_till}}</bold>, and was issued on <bold>{{$warranty_issue_date}}</bold>.
-                                    </p>
-                                </div>
-                                <div style="margin-top:30px;">
-                                    <p style="margin-right:102px;">Company Name  :  <bold>Dyna Roof</bold></p>
-                                    <p>Contact No  :  <bold>7578800222</bold></p>
-                                </div>
-                                
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
+
+        <div class="pro">
+            @if ($material_type == 'SuperPro(20-Years)')
+                <img src="data:image/jpg;base64,{{ base64_encode(file_get_contents('assets/img/superpro-card.jpg')) }}" alt="pro certificate">
+            @else
+                <img src="data:image/jpg;base64,{{ base64_encode(file_get_contents('assets/img/pro-card.jpg')) }}" alt="pro certificate">
+            @endif
+            
+            <div class="contents">
+                <p>
+                    This certificate serves as confirmation of product warranty for 
+                    <span>{{$name}}</span>,
+                     Phone No. <span>{{$phone}}</span>
+                    residing in <span>{{$address}}</span>, 
+                    who has purchased <span>{{$material_type}}</span>
+                    with <span>Serial No. {{$serial_no}}</span> on {{$purchase_date}}
+                </p>
+                <h5> The warranty is issued on {{$warranty_issue_date}} and is valid till {{$warranty_valid_till}} </h5>
+                <p style="font-weight:700;margin-top:0px;">Company Name: Dyna Roof Pvt. Ltd</p>
+                <p style="font-weight:700;margin-top:-20px;">Email Id: info@dynaroof.com | www.houseofdyna.com</p>
+                <p style="font-size:14px;width:50%;line-height:20px;margin-left:150px;">Read the Warranty related Terms and Conditions mentioned in the subsequent pages carefully.</p>
             </div>
         </div>
 
-        {!! $terms_and_conditions !!}
+        {{-- {!! $terms_and_conditions !!} --}}
+        <div class='container'>
+            <div class='terms-content'>
+                <div class='content-area-1 colored-border'>
+                    <div class='d-flex flex-row  align-items-center header'>
+                        <h5>Dyna Pro (10Years) & Super Pro (20 Years) Warranty</h5>
+                        <div class='divider'></div>
+                    </div>
+                    <p>
+                        DynaRoof Pvt. Ltd. hereby provides this Warranty to the Bonafide Buyer of the Product named in the invoice
+                        (‘Customer’ or ‘Buyer’), applicable on Dyna Pro and Dyna Super Pro- color coated roofing sheets (Detail specifications 
+                        provided in the invoice) (Hereinafter referred as ‘Product’), to be used for roofing applications only against the 
+                        detail T&C mentioned below as “Warranty Applicable on”. During the warranty for a period of 10 Years for Dyna Pro 
+                        and 20 Years for Dyna Super Pro from the date of purchase and installation (Installation has to be done within 30days 
+                        from the date of purchase), the company will at its sole discretion, repair or replace the product or parts of a 
+                        product that prove to be defective because of perforation due to any manufacturing defects, under normal conditions. 
+                        To get the warranty facilitation one has to Visit Company’s website or the link https://wa.dynaroof.com/  and register 
+                        themselves by filling the required fields in the form. The registration must be done within 30 days from the date of 
+                        purchase of the material to avail warranty on the products. No warranty will be applicable by any means if the 
+                        registration not done under 30 days.
+                    </p>
+                    <p>
+                        The Warranty is subject to standard terms printed on tax invoice and terms and conditions as mentioned below:-
+                    </p>
+
+                    <div class='d-flex flex-row align-items-center header'>
+                        <h5>Terms & Conditions</h5>
+                        <div class='divider'></div>
+                    </div>
+                    <div class='conditions-div'>
+                        <ol>
+                            <li>
+                                The product must be of the premium category of DynaRoof, termed as Dyna Pro with 10 Years or Dyna Super Pro with 20 
+                                years of warranty and must be purchased from a DynaRoof authorized Distributor/Dealer/Retailer of the company having 
+                                its unique code starting with “DynaRoof”  X.XXmm (X- Thickness) a product of DynaRoof Pvt. Ltd with a combination of 
+                                Number and Letter i.e- P 26B B4 or S 26B B4 (P- Dyna Pro and S- Dyna Super Pro) and processed and installed for roofing 
+                                within 90 days from the date of manufacturing and supply within the territory of India and Bhutan.
+                            </li>
+                            <li>
+                                Please keep a record of the unique code printed on the reverse of your roofing sheet before installation is done, 
+                                which is mandatory to be filled at the time of filling the warranty registration form.
+                            </li>
+                            <li>
+                                The product as supplied should not come in direct/indirect contact with chemical fumes, before, during or after use.
+                            </li>
+                            <li>
+                                The roof must be maintained in accordance with the Do’s and Don’ts mentioned in the DynaRoof Customer/Dealer guidelines 
+                                received along with the invoice from dealer or can be availed from the website link of the 
+                                company - <a href='https://dynaroof.com/customer-guidelines' target='_blank'>https://dynaroof.com/customer-guidelines</a>
+                            </li>
+                            <li>
+                                Surfaces of the installations must be freely exposed to washing by rainfall and kept clear of accumulated dirt and 
+                                debris.
+                            </li>
+                            <li>
+                                Water logging on roofs must be avoided and overlaps must be adequately sealed to prevent ingress of water.
+                            </li>
+                            <li>
+                                End user customer must clean the installed sheets at least twice in a year.
+                            </li>
+                            <li>
+                                The coated metal must not be cleaned with abrasive or chemical cleaners.
+                            </li>
+                            <li>
+                                Do not allow contact of coated steel product with incompatible material that includes lead, copper, bare steel, green 
+                                or chemically treated timber, wet or dry concrete, soils, vegetable matter, any material which will inhibit normal 
+                                exposure to the atmosphere.
+                            </li>
+                            <li>
+                                This warranty specifically excludes from its coverage any defects or failures in the exterior durability standards 
+                                of the product caused by any force majeure events including acts of God (earthquake, fire, storm, floods, torrential 
+                                rain, cyclone, hailstorm), falling objects, external force, explosions, fire, riots, civil commotions, acts of war, 
+                                radiation, harmful gases or fumes, chemicals or foreign substances in the air or atmosphere.
+                            </li>
+                            <li>
+                                Reference to ISO-9223 this T&C is applicable to the region falls under C2 Level only.
+                            </li>
+                        </ol>
+                    </div>
+                    
+                </div>
+                
+                <div class='content-area-2 colored-border'>
+                    <div class='d-flex flex-row  align-items-center header'>
+                        <h5>Warranty not Applicable on:</h5>
+                        <div class='divider'></div>
+                    </div>
+                    <div class='conditions-div'>
+                        <ol>
+                            <li>
+                                Water damage to the Product, directly or indirectly, due to condensation, improper storage, handling, processing, 
+                                forming or packaging prior to or during installation.
+                            </li>
+                            <li>
+                                Usage of product in industrial areas (direct/indirect contact with corrosive fumes, chemical fumes, ash, cement dust 
+                                or animal waste before, during or after use)
+                            </li>
+                            <li>
+                                Natural reduction in paint gloss and natural colour change or the paint finish or any change in colour due to 
+                                accumulation of debris.
+                            </li>
+                            <li>
+                                The warranty does not cover the backside of the coated product.
+                            </li>
+                            <li>
+                                Product that has suffered scratching or abrasion or impact by any hard object.
+                            </li>
+                            <li>
+                                Deterioration caused by use of improper fastener product.
+                            </li>
+                            <li>
+                                The warranty doesn’t cover the areas subject to water runoff from lead or copper flashings or areas in metallic contact with lead or copper.
+                            </li>
+                            <li>
+                                The warranty shall not be applied to the damage or failure which is occurring from accident, natural disaster, fire, 
+                                flood, explosion, falling stone, acts of warriots or due to any other force majeure conditions.
+                            </li>
+                            <li>
+                                The warranty shall not be applied to the damage or failure which is occurring from accident, natural disaster, fire, 
+                                flood, explosion, falling stone, acts of warriots or due to any other force majeure conditions.
+                            </li>
+                            <li>
+                                Warranty can be claimed only by submitting the warranty card in good condition provided by the company while 
+                                purchasing of the material along with the original tax invoice received from the Distributor/Dealer/Retailer or 
+                                the Company.
+                            </li>
+                        </ol>
+                    </div>
+                    <p>
+                        The warranty will be considered null and void if during the investigation company identifies the product has been 
+                        mishandled or not installed as per the company-prescribed Do’s and Don’ts during the warranty period. Under no 
+                        circumstances shall coverage get extended to any loss or damage to a person or property for any incidental, 
+                        contingent, special or consequential damage.
+                    </p>
+                    <div class='d-flex flex-row  align-items-center header'>
+                        <h5 style='color:#4baf46;'>Other excluded situations</h5>
+                        <div class='divider' style='border:3px solid #4baf46;'></div>
+                    </div>
+                    <div class='conditions-div' style='background:#4baf46; marginBottom:50px;'>
+                        <p style='margin-left:15px;'>This limited warranty DOES NOT APPLY in the event of:</p>
+                        <ol>
+                            <li>
+                                Bends less than 4T for all sheet thickness.
+                            </li>
+                            <li>
+                                Slopes of the roof or sections of the roof should not more than 75° from the vertical.
+                            </li>
+                            <li>
+                                Mechanical chemical or other damage sustained during shipment, storage, forming fabrication or during or after erection and installation.
+                            </li>
+                            <li>
+                                Forming which incorporates severe reverse bending or which subjects coating to alternate compression and tension.
+                            </li>
+                            <li>
+                                Failure to Provide free drainage of water, including internal condensation, from overlaps on all other surfaces of 
+                                the sheets or panels.
+                            </li>
+                            <li>
+                                Failure to remove debris from overlaps and all other surfaces of the sheets or panels.
+                            </li>
+                            <li>
+                                Damage caused to the metallic coating by improper roll forming, scouring or cleaning procedures.
+                            </li>
+                            <li>
+                                Deterioration of the panels caused by contact with green or wet lumber or wet storage stain caused by water damage
+                                or condensation.
+                            </li>
+                            <li>
+                                Presence of damp insulation or other corrosive Product in contact with or close proximity to the panel.
+                            </li>
+                            <li>
+                                Warranty will not apply to Product stored or installed in a way which allows contact with animal and / or animal 
+                                waste or its decomposed Product.
+                            </li>
+                            <li>
+                                This warranty will not apply to the defects caused by water infiltration due to improper packaging.
+                            </li>
+                            <li>
+                                This warranty is not valid when there is an exposure in abnormal conditions (aggressive or pollute) such as humid area, 
+                                tropical area, the place within one-mile distance from the seashore, the vicinity of chemical or iron industries, etc.
+                            </li>
+                            <li>
+                                This warranty shall not be applied to the damage or failure which is occurring from accident, natural disaster, 
+                                fire, flood, explosion, falling stone, acts of warriots or due to any other force majeure conditions.
+                            </li>
+                            <li>
+                                Improper handling and storage of the Product or misuse, willful default, gross negligence of Buyer.
+                            </li>
+                            <li>
+                                The warranty will be considered null and void if during the investigation company identifies the Product has been 
+                                mishandled or not installed as per the company-prescribed Do’s and Don’ts during the warranty period. Under no 
+                                circumstances shall coverage get extended to any loss or damage to a person or property for any incidental, 
+                                contingent, special or consequential damage.
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class='content-area-3 colored-border'>
+                    <div class='d-flex flex-row align-items-center header'>
+                        <h5>Do’s and Don’ts</h5>
+                        <div class='divider'></div>
+                    </div>
+                    <div class='conditions-div'>
+                        <div class='d-flex flex-row align-items-center' style='margin-left:10px; marginBottom:20px;'>
+                            
+                            <div class='do-content d-flex flex-row align-items-center'>
+                                <div class='do-icon d-flex flex-row justify-content-center align-items-center'>
+                                    <img src="data:image/jpg;base64,{{ base64_encode(file_get_contents('assets/img/thumbs-01.jpg')) }}" alt="">
+                                </div>
+                                <p>Do's</p>
+                            </div>
+                        </div>
+                        <ol>
+                            <li>
+                                USE PPE while handling & installing.
+                            </li>
+                            <li>
+                                Keep Product in flat, dry & ventilated areas.
+                            </li>
+                            <li>
+                                The Product must be lifted with Nylon ropes.
+                            </li>
+                            <li>
+                                Ensure zero water seepage during storage.
+                            </li>
+                            <li>
+                                Avoid metal to metal contact
+                            </li>
+                            <li>
+                                Good quality fasteners to be used.
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class='conditions-div' style='background:#d40f3a;'>
+                        <div class='d-flex flex-row align-items-center' style='margin-left:10px; margin-bottom:20px;'>
+                            
+                            <div class='dont-content d-flex flex-row align-items-center'>
+                                <div class='dont-icon d-flex flex-row justify-content-center align-items-center'>
+                                    <img src="data:image/jpg;base64,{{ base64_encode(file_get_contents('assets/img/thumbs-02.jpg')) }}" alt="">
+                                </div>
+                                <p>Dont's</p>
+                            </div>
+                        </div>
+                        <ol>
+                            <li>
+                                Product should not come in contact with wet.
+                            </li>
+                            <li>
+                                Product should not come in contact with cement.
+                            </li>
+                            <li>
+                                Product should not come in contact with metal filings
+                            </li>
+                            <li>
+                                Product should not be kept on floor directly.
+                            </li>
+                            <li>
+                                Do not allow dirt to be accumulated on Product.
+                            </li>
+                            <li>
+                                Do not slide sheets on rough surface.
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class='d-flex flex-row align-items-center header'>
+                        <h5>Disclaimer of other warranties</h5>
+                        <div class='divider'></div>
+                    </div>
+                    <p>
+                        Except as expressly set forth in this Warranty Certificate, Company disclaims, and Buyer waives, any and all other 
+                        warranties, whether express or implied, oral or written, including without limitation, any implied warranties of 
+                        merchantability or fitness for a particular purpose.
+                    </p>
+
+                    <div class='d-flex flex-row align-items-center header'>
+                        <h5>Limitation of remedies and liability:</h5>
+                        <div class='divider'></div>
+                    </div>
+                    <p>
+                        The parties agree that the Buyer’s sole and exclusive remedy against the Company shall be for the repair or 
+                        replacement of the defective portion of the warranted Product. The buyer agrees that no other remedy or liability 
+                        (including, but not limited to, indirect, special, punitive, loss of use, business, profits, sales, injury to person 
+                        or property, or any other incidental or consequential loss or damages) shall be available to the Buyer and is hereby 
+                        deemed to be expressly waived and excluded. The maximum liability of the Company in any circumstances, shall not exceed 
+                        the invoice value of the Product. All costs with respect to dismantling, installation, reinstallation, transportation 
+                        shall be solely on account of Buyer and the Company shall not be responsible for the same.
+                    </p>
+                    
+                    <div class='d-flex flex-row align-items-center header'>
+                        <h5>Claims:</h5>
+                        <div class='divider'></div>
+                    </div>
+                    <p>
+                        In the event of any claim under this limited warranty, Buyer must demonstrate to the Company’s satisfaction that 
+                        the failure was due to a breach of this limited warranty. Buyer has the responsibility to provide written notice 
+                        containing particulars sufficient to identify the Buyer and all reasonably obtainable information with respect to 
+                        the time, place and circumstance, including a video and/or photographs of the claimed Perforation due to any 
+                        manufacturing defects for the Company’s inspection. Such records shall at a minimum include the date of purchase, 
+                        the place of purchase, dealer / distributor details and the invoice or any other information reasonably required by 
+                        the Company. The Buyer will arrange for the Company or any agency appointed by the Company to have, during normal 
+                        business hours, complete access to the Product and shall be responsible to make available the Product for inspection 
+                        or survey to determine the actual root cause of Perforation. The Buyer shall further provide access to the Company to 
+                        any information and personnel having knowledge of or information pertaining to the claims under this Limited Warranty. 
+                        It is a primary condition to any obligation of the Company under this limited warranty that the Buyer shall have fully 
+                        paid the agreed contract price and invoice value including tax for the Product sold by the Company to Buyer. Subject to 
+                        strict compliance of the above conditions, the Company shall repair or replace the Product within Ninety (90) days of 
+                        receiving all information, documents from the Buyer and inspection of Product to determine root cause is completed by 
+                        the Company. In the event of any repair or replacement by the Company of the Product, the warranty shall stand 
+                        extinguished and cancelled. The decision of the Company shall be final and binding on the Buyer.
+                    </p>
+
+                </div>
+                
+                <div class='content-area-4 colored-border'>
+                    <div class='d-flex flex-row  align-items-center header'>
+                        <h5>Entire understanding:</h5>
+                        <div class='divider'></div>
+                    </div>
+                    <p>
+                        Any and all representations, promises, warranties or statements by the Company’s agents or personnel that varies, 
+                        conflicts, contradicts or inconsistent in any way from the terms of written limited warranty stipulated hereunder, 
+                        shall be given no force or effect and shall be deemed null and void. Any such representations, promises, warranties 
+                        or statements do not constitute warranties, shall not be relied upon by the buyer and are not part of this limited 
+                        warranty or of the contract for sale of the Product between the Company and buyer. This limited warranty shall be 
+                        deemed to be a part of the contract of sale between the Company and buyer for the Product sold by the Company to the 
+                        buyer. The entire agreement and understanding between the Company and the buyer with respect to Product is embodied 
+                        in this writing. This writing constitutes the final expression of the parties’ agreement with respect to warranties 
+                        and is a complete and exclusive statement of the terms of that agreement.
+                    </p>
+
+                    <div class='d-flex flex-row  align-items-center header'>
+                        <h5>Warranty not transferable:</h5>
+                        <div class='divider'></div>
+                    </div>
+                    <p>
+                        This Limited Warranty is issued only to the original Buyer and is nontransferable and/or non-assignable. 
+                        Should the Buyer become insolvent, bankrupt, make an assignment for the benefit of its creditors, or for 
+                        any reason discontinue its normal or regular business practices, this warranty shall forthwith become null 
+                        and void and have no legal effect.
+                    </p>
+
+                    <div class='d-flex flex-row  align-items-center header'>
+                        <h5>Non waiver:</h5>
+                        <div class='divider'></div>
+                    </div>
+                    <p>
+                        In any instance or series of instances, the determination of the Company not to exercise any right hereunder or 
+                        not to require compliance with any term or condition hereof, shall not constitute a waiver of the Company’s rights 
+                        to exercise all rights and to require compliance with all terms and conditions herein on all occasions prior and 
+                        subsequent to such instance or instances, and no such determination or Series of determinations by the Company 
+                        shall constitute an alteration or waiver of the rights of the Company and Buyer as otherwise set forth herein.
+                    </p>
+
+                    <div class='d-flex flex-row  align-items-center header'>
+                        <h5>Governing law and jurisdiction:</h5>
+                        <div class='divider'></div>
+                    </div>
+                    <p>
+                        The rights and obligations of the Company and Buyer hereunder shall be construed and governed by the laws of India, 
+                        without giving effect to conflict of law principles and the Parties agree to submit to the exclusive jurisdiction 
+                        of the appropriate courts at Guwahati, Assam(India).
+                    </p>
+                    
+                </div>
+
+                <div class='d-flex flex-row justify-content-center' style='margin-bottom:30px;'>
+                    <p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+                </div>
+                
+            </div>
+        </div> 
     </div>
 </body>
+
 </html>
