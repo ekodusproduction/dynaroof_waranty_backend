@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\Warranty;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -218,6 +219,7 @@ class RegisteredCustomerController extends Controller
             $customer_id = decrypt($request->customer_id);
             try{
                 Customer::where('id', $customer_id)->delete();
+                Warranty::where('customer_id', $customer_id)->delete();
                 return $this->success('Great! Customer deleted successfully', null, null, 200);
             }catch(\Exception $e){
                 return $this->error('Oops! Something went wrong'.$e->getMessage(), null, null, 500);
