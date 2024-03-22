@@ -49,9 +49,6 @@
             margin: 50px;
         }
 
-        .terms-content {
-            margin-top: 10px;
-        }
 
         .colored-border {
             border: 1px solid #198c91;
@@ -62,22 +59,21 @@
             width: 500px;
             border: 3px solid #198c91;
             border-radius: 2px;
-            margin-left: 30px;
+            margin-bottom: 10px;
         }
 
         .content-area-1 {
             padding: 20px;
-            margin-bottom: 30px;
         }
 
         .content-area-1 h5 {
             color: #198c91;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .content-area-1 .header {
-            margin-top: 50px;
+            margin-bottom: 10px;
         }
 
         .content-area-1 p {
@@ -89,7 +85,6 @@
             color: white;
             padding: 15px 15px 15px 10px;
             border-radius: 10px;
-            margin-bottom: 50px;
         }
 
         .conditions-div ol li {
@@ -104,17 +99,17 @@
 
         .content-area-2 {
             padding: 20px;
-            margin-bottom: 30px;
+            margin-top:30px;
         }
 
         .content-area-2 h5 {
             color: #d40f3a;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .content-area-2 .header {
-            margin-top: 50px;
+            margin-bottom: 10px;
         }
 
         .content-area-2 p {
@@ -123,10 +118,10 @@
         }
 
         .content-area-2 .divider {
-            width: 500px;
+            width: 300px;
             border: 3px solid #d40f3a;
             border-radius: 2px;
-            margin-left: 30px;
+            margin-bottom: 10px;
         }
 
         .content-area-2 .conditions-div {
@@ -134,7 +129,6 @@
             color: white;
             padding: 15px 15px 15px 10px;
             border-radius: 10px;
-            margin-bottom: 20px;
         }
 
         .content-area-2 .conditions-div ol li {
@@ -149,17 +143,18 @@
 
         .content-area-3 {
             padding: 20px;
-            margin-bottom: 30px;
+            margin-top:20px;
         }
 
         .content-area-3 h5 {
             color: #198c91;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .content-area-3 .header {
-            margin-top: 50px;
+            margin-bottom: 10px;
+           
         }
 
         .content-area-3 p {
@@ -167,10 +162,9 @@
         }
 
         .content-area-3 .divider {
-            width: 500px;
+            width: 300px;
             border: 3px solid #198c91;
             border-radius: 2px;
-            margin-left: 30px;
         }
 
         .content-area-3 .do-icon {
@@ -179,11 +173,15 @@
             width: 40px;
             border-radius: 50%;
             border: 2px solid rgb(245, 41, 41);
-            margin-left: -10px;
+            margin-left: -5px;
+            float: left;
+            margin-top:-20px;
         }
 
         .content-area-3 .do-icon img {
-            width:25px;
+            width: 25px;
+            margin-top: 5px;
+            margin-left: 5px;
         }
 
         .content-area-3 .do-content {
@@ -192,16 +190,18 @@
             border-left: none;
             border-radius: 50px;
             width: 150px;
-            padding: 0px 5px 0px 5px;
+            padding: 20px 5px 10px 5px;
             margin-left: 10px;
+            margin-bottom: 15px;
         }
 
         .content-area-3 .do-content p {
             margin-bottom: 0px;
-            margin-left: 20px;
+            margin-left: 50px;
             font-size: 18px;
             font-weight: 600;
-            color:white;
+            color: white;
+            margin-top:-10px;
         }
 
         .content-area-3 .conditions-div ol li {
@@ -216,11 +216,15 @@
             width: 40px;
             border-radius: 50%;
             border: 2px solid #198c91;
-            margin-left: -10px;
+            margin-left: -6px;
+            float: left;
+            margin-top: -20px;
         }
 
         .content-area-3 .dont-icon img {
             width:25px;
+            margin-top: 8px;
+            margin-left: 5px;
         }
 
         .content-area-3 .dont-content {
@@ -229,21 +233,23 @@
             border-left: none;
             border-radius: 50px;
             width: 150px;
-            padding: 0px 5px 0px 5px;
+            padding: 20px 5px 10px 5px;
             margin-left: 10px;
+            margin-bottom: 15px;
         }
 
         .content-area-3 .dont-content p {
             margin-bottom: 0px;
-            margin-left: 20px;
+            margin-left: 53px;
             font-size: 18px;
             font-weight: 600;
             color:white;
+            margin-top:-10px;
         }
 
         .content-area-4 {
             padding: 20px;
-            margin-bottom: 30px;
+            margin-top: 70px;
         }
 
         .content-area-4 h5 {
@@ -253,7 +259,7 @@
         }
 
         .content-area-4 .header {
-            margin-top: 50px;
+            margin-top: 5px;
         }
 
         .content-area-4 p {
@@ -261,10 +267,10 @@
         }
 
         .content-area-4 .divider {
-            width: 500px;
+            width: 300px;
             border: 3px solid #198c91;
             border-radius: 2px;
-            margin-left: 30px;
+            margin-bottom: 20px;
         }
         .pro img{
             width:700px;
@@ -318,7 +324,7 @@
         <div class='container'>
             <div class='terms-content'>
                 <div class='content-area-1 colored-border'>
-                    <div class='d-flex flex-row  align-items-center header'>
+                    <div class='header'>
                         <h5>Dyna Pro (10Years) & Super Pro (20 Years) Warranty</h5>
                         <div class='divider'></div>
                     </div>
@@ -339,7 +345,7 @@
                         The Warranty is subject to standard terms printed on tax invoice and terms and conditions as mentioned below:-
                     </p>
 
-                    <div class='d-flex flex-row align-items-center header'>
+                    <div class='header'>
                         <h5>Terms & Conditions</h5>
                         <div class='divider'></div>
                     </div>
@@ -397,7 +403,7 @@
                 </div>
                 
                 <div class='content-area-2 colored-border'>
-                    <div class='d-flex flex-row  align-items-center header'>
+                    <div class='header'>
                         <h5>Warranty not Applicable on:</h5>
                         <div class='divider'></div>
                     </div>
@@ -442,13 +448,7 @@
                             </li>
                         </ol>
                     </div>
-                    <p>
-                        The warranty will be considered null and void if during the investigation company identifies the product has been 
-                        mishandled or not installed as per the company-prescribed Do’s and Don’ts during the warranty period. Under no 
-                        circumstances shall coverage get extended to any loss or damage to a person or property for any incidental, 
-                        contingent, special or consequential damage.
-                    </p>
-                    <div class='d-flex flex-row  align-items-center header'>
+                    <div class='header'>
                         <h5 style='color:#4baf46;'>Other excluded situations</h5>
                         <div class='divider' style='border:3px solid #4baf46;'></div>
                     </div>
@@ -512,16 +512,16 @@
                     </div>
                 </div>
 
-                <div class='content-area-3 colored-border'>
-                    <div class='d-flex flex-row align-items-center header'>
+                <div class='content-area-3 colored-border' style="margin-bottom:40px;">
+                    <div class='header'>
                         <h5>Do’s and Don’ts</h5>
                         <div class='divider'></div>
                     </div>
                     <div class='conditions-div'>
-                        <div class='d-flex flex-row align-items-center' style='margin-left:10px; marginBottom:20px;'>
+                        <div style='margin-left:10px; marginBottom:20px;   '>
                             
-                            <div class='do-content d-flex flex-row align-items-center'>
-                                <div class='do-icon d-flex flex-row justify-content-center align-items-center'>
+                            <div class='do-content'  >
+                                <div class='do-icon'   >
                                     <img src="data:image/jpg;base64,{{ base64_encode(file_get_contents('assets/img/thumbs-01.jpg')) }}" alt="">
                                 </div>
                                 <p>Do's</p>
@@ -549,11 +549,11 @@
                         </ol>
                     </div>
 
-                    <div class='conditions-div' style='background:#d40f3a;'>
-                        <div class='d-flex flex-row align-items-center' style='margin-left:10px; margin-bottom:20px;'>
+                    <div class='conditions-div' style='background:#d40f3a;margin-top:10px;'>
+                        <div style='margin-left:10px; margin-bottom:20px;   '>
                             
-                            <div class='dont-content d-flex flex-row align-items-center'>
-                                <div class='dont-icon d-flex flex-row justify-content-center align-items-center'>
+                            <div class='dont-content'  >
+                                <div class='dont-icon'   >
                                     <img src="data:image/jpg;base64,{{ base64_encode(file_get_contents('assets/img/thumbs-02.jpg')) }}" alt="">
                                 </div>
                                 <p>Dont's</p>
@@ -581,17 +581,20 @@
                         </ol>
                     </div>
 
-                    <div class='d-flex flex-row align-items-center header'>
+                </div>
+                
+                <div class='content-area-4 colored-border'>
+                    <div class='header'>
                         <h5>Disclaimer of other warranties</h5>
                         <div class='divider'></div>
                     </div>
-                    <p>
+                    <p style="margin-bottom:0px;">
                         Except as expressly set forth in this Warranty Certificate, Company disclaims, and Buyer waives, any and all other 
                         warranties, whether express or implied, oral or written, including without limitation, any implied warranties of 
                         merchantability or fitness for a particular purpose.
                     </p>
 
-                    <div class='d-flex flex-row align-items-center header'>
+                    <div class='header'>
                         <h5>Limitation of remedies and liability:</h5>
                         <div class='divider'></div>
                     </div>
@@ -605,7 +608,7 @@
                         shall be solely on account of Buyer and the Company shall not be responsible for the same.
                     </p>
                     
-                    <div class='d-flex flex-row align-items-center header'>
+                    <div class='header'  >
                         <h5>Claims:</h5>
                         <div class='divider'></div>
                     </div>
@@ -627,11 +630,7 @@
                         the Company. In the event of any repair or replacement by the Company of the Product, the warranty shall stand 
                         extinguished and cancelled. The decision of the Company shall be final and binding on the Buyer.
                     </p>
-
-                </div>
-                
-                <div class='content-area-4 colored-border'>
-                    <div class='d-flex flex-row  align-items-center header'>
+                    <div class='header'  >
                         <h5>Entire understanding:</h5>
                         <div class='divider'></div>
                     </div>
@@ -647,7 +646,7 @@
                         and is a complete and exclusive statement of the terms of that agreement.
                     </p>
 
-                    <div class='d-flex flex-row  align-items-center header'>
+                    <div class='header'  >
                         <h5>Warranty not transferable:</h5>
                         <div class='divider'></div>
                     </div>
@@ -658,7 +657,7 @@
                         and void and have no legal effect.
                     </p>
 
-                    <div class='d-flex flex-row  align-items-center header'>
+                    <div class='header'  >
                         <h5>Non waiver:</h5>
                         <div class='divider'></div>
                     </div>
@@ -670,7 +669,7 @@
                         shall constitute an alteration or waiver of the rights of the Company and Buyer as otherwise set forth herein.
                     </p>
 
-                    <div class='d-flex flex-row  align-items-center header'>
+                    <div class='header'  >
                         <h5>Governing law and jurisdiction:</h5>
                         <div class='divider'></div>
                     </div>
@@ -682,7 +681,7 @@
                     
                 </div>
 
-                <div class='d-flex flex-row justify-content-center' style='margin-bottom:30px;'>
+                <div style='margin-bottom:30px;margin-left:200px;'>
                     <p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
                 </div>
                 
