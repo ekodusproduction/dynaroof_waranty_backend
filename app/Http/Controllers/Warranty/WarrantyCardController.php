@@ -21,7 +21,7 @@ class WarrantyCardController extends Controller
     use ApiResponse, SMSResponse, TermsAndConditions ;
     public function generateWarrantyCard(Request $request){
         try{
-            $get_customers = Customer::orderBy('created_at', 'desc')->where('is_warranty_issued', 0)->get();
+            $get_customers = Customer::orderBy('created_at', 'DESC')->where('is_warranty_issued', 0)->where('country', '!=', 'bhutan')->get();
             return view('warranty.warranty')->with(['get_customers' => $get_customers]);
         }catch(\Exception $e){
             echo 'Oops! Something went wrong';
