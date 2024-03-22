@@ -49,6 +49,8 @@
                                                 data-material={{$item->customers->material_type}}
                                                 data-link={{asset($item->card_link)}}
                                                 >Send</button>
+
+                                                
                                             </td>
                                         </tr>
                                     @empty

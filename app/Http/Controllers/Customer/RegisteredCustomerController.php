@@ -206,4 +206,22 @@ class RegisteredCustomerController extends Controller
             return $this->error('Oops! Something went wrong'.$e->getMessage(), null, null, 500);
         }
     }
+
+    public function deleteCustomer(Request $request){
+        $validator = Validator::make($request->all(), [
+            'customer_id' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return $this->error('Oops! '.$validator->errors()->first(), null, null, 400);
+        }else{
+            $customer_id = decrypt($request->customer_id);
+            try{
+                Customer::where('id', $customer_id)->delete();
+                return $this->success('Great! Customer deleted successfully', null, null, 200);
+            }catch(\Exception $e){
+                return $this->error('Oops! Something went wrong'.$e->getMessage(), null, null, 500);
+            }
+        }
+    }
 }

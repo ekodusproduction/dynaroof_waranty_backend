@@ -36,7 +36,38 @@
                                                 <td>{{ \Carbon\Carbon::parse($item->date_of_purchase)->format('d M, Y') }}
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-sm btn-primary cutomerModalBtn" data-id={{encrypt($item->id)}}>View</button>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">More</button>
+                                                        <ul class="dropdown-menu" style="padding:15px;">
+                                                            <li>
+                                                                <a class="dropdown-item btn btn-sm btn-primary cutomerModalBtn" href="javascript:void(0);" data-id={{encrypt($item->id)}}>
+                                                                    <i class="tf-icons bx bxs-search"> View </i>
+                                                                </a>
+                                                                <hr class="dropdown-divider">
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item btn btn-sm btn-info edit-customer-btn" href="javascript:void(0);" data-id={{encrypt($item->id)}}>
+                                                                    <i class="tf-icons bx bxs-edit"> Edit </i>
+                                                                </a>
+                                                                <hr class="dropdown-divider">
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item btn-sm btn-danger delete-customer-btn" href="javascript:void(0);"  data-id={{encrypt($item->id)}}>
+                                                                    <i class="tf-icons bx bxs-trash"> Delete</i>
+                                                                </a>
+                                                            </li>
+                                                            
+                                                        </ul>
+                                                    </div>
+                                                    {{-- <button class="btn btn-sm btn-primary cutomerModalBtn" data-id={{encrypt($item->id)}}>
+                                                        <i class="tf-icons bx bxs-search"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger delete-customer-btn" data-id={{encrypt($item->id)}}>
+                                                        <i class="tf-icons bx bxs-trash"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-info delete-customer-btn" data-id={{encrypt($item->id)}}>
+                                                        <i class="tf-icons bx bxs-edit"></i>
+                                                    </button> --}}
                                                 </td>
                                             </tr>
                                         @empty
@@ -219,6 +250,39 @@
                     console.log(error)
                 }
 
+            });
+        });
+
+        $('.delete-customer-btn').on('click', function(e){
+            e.preventDefault();
+
+            const customer_id = $(this).data('id');
+
+            $(this).text('Please wait...');
+            $(this).attr('disabled', true);
+
+            $.ajax({
+                url:"{{route('admin.delete.customer')}}",
+                type:"POST",
+                data:{
+                    '_token': "{!! csrf_token() !!}",
+                    'customer_id':customer_id
+                },
+                success:function(data){
+
+                    if(data.status == 200){
+                       toastr.success(data.message)
+                       window.location.reload(true);
+                    }else{
+                        toastr.error(data.message)
+                        $('.delete-customer-btn').text('Delete');
+                        $('.delete-customer-btn').attr('disabled', false);
+                    }
+                },error:function(err){
+                    toastr.error("Oops! Something went wrong")
+                    $('.delete-customer-btn').text('Delete');
+                    $('.delete-customer-btn').attr('disabled', false);
+                }
             });
         });
     </script>
