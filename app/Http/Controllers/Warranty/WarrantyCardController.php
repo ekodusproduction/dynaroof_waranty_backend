@@ -56,8 +56,9 @@ class WarrantyCardController extends Controller
                 'warranty_valid_till' => Carbon::parse($warranty_valid_till)->format('d-m-Y'),
                 'terms_and_conditions' => $this->termsAndConditions()
             ];
+            $file_name = uniqid() .'_'. $get_customers->material_type.'_warranty_card.pdf';
 
-            $pdfFilePath = public_path(uniqid() .'_'. $get_customers->material_type.'_warranty_card.pdf');
+            $pdfFilePath = public_path($file_name);
 
             $pdf = $this->createPDF($data, $pdfFilePath);
 
@@ -78,7 +79,7 @@ class WarrantyCardController extends Controller
 
             Warranty::create([
                 'customer_id' => $get_customers->id,
-                'card_link' => $pdfFilePath,
+                'card_link' => $file_name,
                 'warranty_issue_date' => Carbon::now(),
                 'warranty_valid_till' => $warranty_valid_till
             ]);
