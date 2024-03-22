@@ -32,6 +32,8 @@ Route::group(['middleware' => 'auth'], function(){
         Route::post('get-details', [RegisteredCustomerController::class, 'getCustomerDetails'])->name('admin.get.customer.details');
         Route::post('invoice-count', [RegisteredCustomerController::class, 'downloadInvoiceCount'])->name('admin.invoice.count');
         Route::post('delete', [RegisteredCustomerController::class, 'deleteCustomer'])->name('admin.delete.customer');
+        Route::get('edit/{id}', [RegisteredCustomerController::class, 'editCustomer'])->name('admin.edit.customer');
+        Route::post('save-edited-details', [RegisteredCustomerController::class, 'saveEditCustomerDetails'])->name('admin.save.edited.customer.details');
     });
     Route::group(['prefix' => 'warranty'], function(){
         Route::get('generate', [WarrantyCardController::class, 'generateWarrantyCard'])->name('admin.generate.warranty.card');

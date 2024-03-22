@@ -46,7 +46,7 @@
                                                                 <hr class="dropdown-divider">
                                                             </li>
                                                             <li>
-                                                                <a class="dropdown-item btn btn-sm btn-info edit-customer-btn" href="javascript:void(0);" data-id={{encrypt($item->id)}}>
+                                                                <a class="dropdown-item btn btn-sm btn-info edit-customer-btn" href="{{route('admin.edit.customer', ['id' => encrypt($item->id)])}}">
                                                                     <i class="tf-icons bx bxs-edit"> Edit </i>
                                                                 </a>
                                                                 <hr class="dropdown-divider">

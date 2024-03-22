@@ -224,4 +224,34 @@ class RegisteredCustomerController extends Controller
             }
         }
     }
+
+    public function editCustomer($id){
+        $customer_id = decrypt($id);
+        try{
+            $customer_details = Customer::where('id', $customer_id)->first();
+            return view('customer.edit-customer')->with(['customer' => $customer_details]);
+        }catch(\Exception $e){
+            echo 'Oops! Something went wrong';
+        }
+    }
+
+    public function saveEditCustomerDetails(Request $request){
+        $validator = Validator::make($request->all(),[
+            'customer_id' => 'required',
+            'serial_number' => 'required|min:6|max:6'
+        ]);
+
+        if($validator->fails()){
+            return $this->error('Oops! '.$validator->errors()->first(), null, null, 400);
+        }else{
+            try{
+                Customer::where('id', $request->customer_id)->update([
+                    'serial_number' => $request->serial_number
+                ]);
+                return $this->success('Great! Details updated successfully', null, null, 200);
+            }catch(\Exception $e){
+                return $this->error('Oops! Something went wrong', null, null, 500);
+            }
+        }
+    }
 }
