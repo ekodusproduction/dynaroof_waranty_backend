@@ -34,7 +34,7 @@
                                             <td>{{ $item->customers->material_type }}</td>
                                             <td>{{ \Carbon\Carbon::parse($item->warranty_issue_date)->format('d M, Y') }}</td>
                                             <td>{{ \Carbon\Carbon::parse($item->warranty_valid_till)->format('d M, Y') }}</td>
-                                            <td><a href="{{ asset($item->card_link)}}" target="_blank">Warranty</a></td>
+                                            <td><a href="{{basename($item->card_link)}}" target="_blank">Warranty</a></td>
                                             <td>
                                                 @if ($item->is_download_link_sent == 1)
                                                     <p class="text-success mb-0">Sent</p>
