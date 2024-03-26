@@ -43,14 +43,16 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <button class="btn btn-sm btn-primary sendLinkBtn" 
-                                                data-id={{$item->customer_id}}
-                                                data-phone={{$item->customers->phone}}
-                                                data-material={{$item->customers->material_type}}
-                                                data-link={{asset($item->card_link)}}
-                                                >Send</button>
-
-                                                
+                                                @if ($item->customers->country == 'bhutan')
+                                                    <button class="btn btn-sm btn-secondary">Not Available</button>
+                                                @else
+                                                    <button class="btn btn-sm btn-primary sendLinkBtn" 
+                                                    data-id={{$item->customer_id}}
+                                                    data-phone={{$item->customers->phone}}
+                                                    data-material={{$item->customers->material_type}}
+                                                    data-link={{asset($item->card_link)}}
+                                                    >Send</button>
+                                                @endif
                                             </td>
                                         </tr>
                                     @empty
