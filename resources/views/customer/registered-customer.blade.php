@@ -109,11 +109,36 @@
                 dom: 'Bfrtip',
                 ordering: true,
                 searching: true,
+                // buttons: [
+                //     'pdf',
+                //     'excel',
+                //     'print'
+                // ]
                 buttons: [
-                    'pdf',
-                    'excel',
-                    'print'
-                ]
+                    {
+                        extend: 'print',
+                        pageSize: 'A4',
+                        footer: true,
+                        exportOptions: {
+                            columns: [0,1,2,3,4,5,6,7]
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        pageSize: 'A4',
+                        footer: true,
+                        exportOptions: {
+                            columns: [0,1,2,3,4,5,6,7]
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        footer: false,
+                        exportOptions: {
+                            columns: [0,1,2,3,4,5,6,7]
+                        }
+                    } 
+                ],
             });
         });
 
