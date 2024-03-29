@@ -240,7 +240,8 @@ class RegisteredCustomerController extends Controller
     public function saveEditCustomerDetails(Request $request){
         $validator = Validator::make($request->all(),[
             'customer_id' => 'required',
-            'serial_number' => 'required|min:6|max:6'
+            'serial_number' => 'required|min:6|max:6',
+            'phone' => 'required|digits:10|numeric'
         ]);
 
         if($validator->fails()){
@@ -248,7 +249,8 @@ class RegisteredCustomerController extends Controller
         }else{
             try{
                 Customer::where('id', $request->customer_id)->update([
-                    'serial_number' => $request->serial_number
+                    'serial_number' => $request->serial_number,
+                    'phone' => $request->phone
                 ]);
                 return $this->success('Great! Details updated successfully', null, null, 200);
             }catch(\Exception $e){

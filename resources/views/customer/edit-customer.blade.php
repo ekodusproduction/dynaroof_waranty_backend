@@ -12,6 +12,7 @@
                         <div class="mb-4">
                             <form id="editCustomerForm">
                                 @csrf
+                                <input type="hidden" name="customer_id" value="{{$customer->id}}">
                                 <div class="form-group mb-3">
                                     <div class="mb-2">
                                         <label for="">Customer Name</label>
@@ -20,9 +21,14 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <div class="mb-2">
+                                        <label for="">Phone Number</label>
+                                    </div>
+                                    <input type="text" name="phone" class="form-control" value="{{$customer->phone}}" minlength="10" maxlength="10" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <div class="mb-2">
                                         <label for="">Serial Number</label>
                                     </div>
-                                    <input type="hidden" name="customer_id" value="{{$customer->id}}">
                                     <input type="text" name="serial_number" class="form-control" value="{{$customer->serial_number}}" minlength="6" maxlength="6" required>
                                 </div>
                                 <div class="form-group">
