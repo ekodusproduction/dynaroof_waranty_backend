@@ -21,6 +21,7 @@
                                             <th>Dealer Name</th>
                                             <th>Material Type</th>
                                             <th>Date of Purchase</th>
+                                            <th>Date of Reg.</th>
                                             <th>Warranty Issued</th>
                                             <th>Action</th>
                                         </tr>
@@ -35,6 +36,7 @@
                                                 <td>{{ $item->dealer_name }}</td>
                                                 <td>{{ $item->material_type }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($item->date_of_purchase)->format('d M, Y') }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d M, Y') }}</td>
                                                 <td style="text-align: center;">
                                                     @if ($item->is_warranty_issued == 1)
                                                         <p style="font-weight:bold;color:rgb(3, 158, 3);">YES</p>
