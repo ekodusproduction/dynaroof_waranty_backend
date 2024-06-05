@@ -21,7 +21,7 @@
                                             <th>Dealer Name</th>
                                             <th>Material Type</th>
                                             <th>Date of Purchase</th>
-                                            <th>Date of Reg.</th>
+                                            <th>Date of Apply</th>
                                             <th>Warranty Issued</th>
                                             <th>Action</th>
                                         </tr>
@@ -31,7 +31,7 @@
                                             <tr>
                                                 <td>{{ $index + 1 }}</td>
                                                 <td>{{ $item->name }}</td>
-                                                <td>{{ \Str::limit($item->email, 10) }}</td>
+                                                <td>{{ \Str::limit($item->email, 15) }}</td>
                                                 <td>{{ $item->phone }}</td>
                                                 <td>{{ $item->dealer_name }}</td>
                                                 <td>{{ $item->material_type }}</td>
