@@ -30,8 +30,8 @@
                                         @forelse ($customer as $index => $item)
                                             <tr>
                                                 <td>{{ $index + 1 }}</td>
-                                                <td>{{ \Str::limit($item->name, 8) }}</td>
-                                                <td>{{ $item->email }}</td>
+                                                <td>{{ $item->name }}</td>
+                                                <td>{{ \Str::limit($item->email, 10) }}</td>
                                                 <td>{{ $item->phone }}</td>
                                                 <td>{{ $item->dealer_name }}</td>
                                                 <td>{{ $item->material_type }}</td>
