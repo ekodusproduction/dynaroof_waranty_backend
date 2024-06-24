@@ -70,7 +70,8 @@ class RegisteredCustomerController extends Controller
                                 'otp' => $otp
                             ]);
                             
-                            $flowId = '6396aeb36fed3f4e8601e953';
+                            // $flowId = '6396aeb36fed3f4e8601e953';
+                            $flowId = '66769e0bd6fc0510b9627642';
                             $sendOTPSMS =  $this->sendOTPSMS(null, $flowId, '91'.$request->phone, $otp );
                             // $sendOTPSMS = true;
                             if($sendOTPSMS){
@@ -120,7 +121,8 @@ class RegisteredCustomerController extends Controller
                     if($request->country == 'bhutan'){
                         return $this->success('Thank you for applying. Your warranty card will be issued after the details are being reviewed successfully.', $request->country, null, 200);
                     }else{
-                        $flowId = '6396aeb36fed3f4e8601e953';
+                        // $flowId = '6396aeb36fed3f4e8601e953';
+                        $flowId = '66769e0bd6fc0510b9627642';
 
                         $sendOTPSMS =  $this->sendOTPSMS(null, $flowId, '91'.$request->phone, $otp );
                         // $sendOTPSMS = true;
@@ -185,7 +187,8 @@ class RegisteredCustomerController extends Controller
                     'otp' => $otp
                 ]);
                 // $templateId = '1307167066897372955';
-                $flowId = '6396aeb36fed3f4e8601e953';
+                // $flowId = '6396aeb36fed3f4e8601e953';
+                $flowId = '66769e0bd6fc0510b9627642';
                 $sendOTPSMS =  $this->sendOTPSMS(null, $flowId, '91'.$request->phone, $otp );
                 if($sendOTPSMS){
                     return $this->success('OTP sent successfully', null, null, 200);
